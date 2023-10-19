@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "42350006890",
+    "project_id": "lofo-ddf6f",
+    "storage_bucket": "lofo-ddf6f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:42350006890:android:fd1f9187adf2afa8efb013",
+        "android_client_info": {
+          "package_name": "com.shruti.lofo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzsEsnCyZ7zJgbh4UctaY_1OYAMMcJbwU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
