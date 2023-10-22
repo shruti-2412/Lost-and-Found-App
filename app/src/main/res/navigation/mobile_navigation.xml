@@ -5,7 +5,6 @@
     android:id="@+id/mobile_navigation"
     app:startDestination="@+id/navigation_dashboard">
 
-
     <fragment
         android:id="@+id/navigation_dashboard"
         android:name="com.shruti.lofo.ui.DashBoard.DashBoardFragment"

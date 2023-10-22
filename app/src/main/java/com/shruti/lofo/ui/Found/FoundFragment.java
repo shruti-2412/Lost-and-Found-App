@@ -12,24 +12,21 @@ import com.shruti.lofo.databinding.FragmentFoundBinding;
 
 public class FoundFragment extends Fragment {
 
-private FragmentFoundBinding binding;
+    private FragmentFoundBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
-            ViewGroup container, Bundle savedInstanceState) {
+                             ViewGroup container, Bundle savedInstanceState) {
         FoundViewModel foundViewModel =
                 new ViewModelProvider(this).get(FoundViewModel.class);
 
-    binding = FragmentFoundBinding.inflate(inflater, container, false);
-    View root = binding.getRoot();
+        binding = FragmentFoundBinding.inflate(inflater, container, false);
+        View root = binding.getRoot();
 
         final TextView textView = binding.textFound;
+        textView.setVisibility(View.VISIBLE); // Set the visibility to be visible
         foundViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 
-@Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
-    }
+
 }

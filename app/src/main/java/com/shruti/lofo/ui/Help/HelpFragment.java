@@ -12,24 +12,21 @@ import com.shruti.lofo.databinding.FragmentHelpBinding;
 
 public class HelpFragment extends Fragment {
 
-private FragmentHelpBinding binding;
+    private FragmentHelpBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
-            ViewGroup container, Bundle savedInstanceState) {
+                             ViewGroup container, Bundle savedInstanceState) {
         HelpViewModel helpViewModel =
                 new ViewModelProvider(this).get(HelpViewModel.class);
 
-    binding = FragmentHelpBinding.inflate(inflater, container, false);
-    View root = binding.getRoot();
+        binding = FragmentHelpBinding.inflate(inflater, container, false);
+        View root = binding.getRoot();
 
         final TextView textView = binding.textHelp;
+        textView.setVisibility(View.VISIBLE); // Set the visibility to be visible
         helpViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 
-@Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
-    }
+
 }

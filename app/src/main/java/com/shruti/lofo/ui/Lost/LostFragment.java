@@ -12,24 +12,21 @@ import com.shruti.lofo.databinding.FragmentLostBinding;
 
 public class LostFragment extends Fragment {
 
-private FragmentLostBinding binding;
+    private FragmentLostBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
-            ViewGroup container, Bundle savedInstanceState) {
+                             ViewGroup container, Bundle savedInstanceState) {
         LostViewModel lostViewModel =
                 new ViewModelProvider(this).get(LostViewModel.class);
 
-    binding = FragmentLostBinding.inflate(inflater, container, false);
-    View root = binding.getRoot();
+        binding = FragmentLostBinding.inflate(inflater, container, false);
+        View root = binding.getRoot();
 
         final TextView textView = binding.textLost;
+        textView.setVisibility(View.VISIBLE); // Set the visibility to be visible
         lostViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 
-@Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
-    }
+
 }
