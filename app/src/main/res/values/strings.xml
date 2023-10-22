@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">LOFO</string>
+    <string name="title_activity_lost_items">LostItems</string>
+    <string name="title_lost">Lost</string>
+    <string name="title_found">Found</string>
+    <string name="title_help">Help</string>
 </resources>
