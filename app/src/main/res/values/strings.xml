@@ -4,4 +4,6 @@
     <string name="title_lost">Lost</string>
     <string name="title_found">Found</string>
     <string name="title_help">Help</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

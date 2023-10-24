@@ -10,7 +10,7 @@ public class LostViewModel extends ViewModel {
 
     public LostViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is Lost fragment");
+        mText.setValue("");
     }
 
     public LiveData<String> getText() {
