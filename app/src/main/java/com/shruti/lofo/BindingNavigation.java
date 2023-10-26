@@ -10,15 +10,18 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.google.firebase.FirebaseApp;
 import com.shruti.lofo.databinding.ActivityBindNavBinding;
 
 
 public class BindingNavigation extends AppCompatActivity {
 
+
     private ActivityBindNavBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        FirebaseApp.initializeApp(BindingNavigation.this);
         super.onCreate(savedInstanceState);
 
         binding = ActivityBindNavBinding.inflate(getLayoutInflater());
