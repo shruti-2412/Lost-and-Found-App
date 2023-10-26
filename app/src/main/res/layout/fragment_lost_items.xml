@@ -1,79 +1,187 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.Lost.LostItemsFragment">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#EFEDF2"
         android:orientation="vertical"
         android:padding="16dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add details about your lost item"
-            android:textSize="20sp"
             android:layout_gravity="center"
-            android:layout_marginBottom="16dp" />
+            android:layout_marginBottom="16dp"
+            android:text="Add details of your lost item"
+            android:textAlignment="center"
+            android:textColor="#735478"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Item Name" />
 
         <EditText
             android:id="@+id/item_name_edittext"
-            android:layout_width="match_parent"
+            android:layout_width="359dp"
+            android:layout_height="34dp"
+            android:layout_marginBottom="13dp"
+            android:background="@color/white"
+            android:backgroundTint="#FFFFFF"
+            android:inputType="text" />
+
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Item name"
-            android:inputType="text"
-            android:layout_marginBottom="16dp" />
+            android:text="Description" />
 
         <EditText
-            android:id="@+id/category_edittext"
+            android:id="@+id/description"
+            android:layout_width="355dp"
+            android:layout_height="45dp"
+            android:layout_marginBottom="16dp"
+            android:background="@color/white"
+            android:inputType="text" />
+
+
+        <TextView
+            android:layout_width="236dp"
+            android:layout_height="wrap_content"
+            android:text="Select category" />
+
+        <Spinner
+            android:id="@+id/categorySpinner"
+            android:layout_width="358dp"
+            android:layout_height="34dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/black"
+            android:backgroundTint="#FFFFFF"
+            android:hapticFeedbackEnabled="false" />
+
+        <EditText
+            android:id="@+id/otherCategoryEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Category"
+            android:layout_marginTop="16dp"
+            android:hint="Specify Category"
             android:inputType="text"
-            android:layout_marginBottom="16dp" />
+            android:visibility="gone" />
 
-        <RadioGroup
-            android:id="@+id/radioGroup"
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_marginTop="16dp"
+            android:text="Location" />
 
-            <RadioButton
-                android:id="@+id/newRadioButton"
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="New" />
+                android:layout_marginTop="16dp"
+                android:src="@drawable/baseline_my_location_24"></ImageView>
 
-            <RadioButton
-                android:id="@+id/oldRadioButton"
+            <EditText
+                android:id="@+id/location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Old" />
-        </RadioGroup>
+                android:backgroundTint="#1A0F0F"
+                android:hint="Location at where you think you lost it!"></EditText>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Select Date" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/datePickerButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/baseline_date_range_24" />
+
+                <EditText
+                    android:id="@+id/selectedDateEditText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#573C3C"
+                    android:hint="Selected Date"
+                    android:inputType="none" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Select Time" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/timePickerButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/baseline_access_time_24" />
+
+                <EditText
+                    android:id="@+id/selectedTimeEditText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#291212"
+                    android:hint="Selected Time"
+                    android:inputType="none" />
+            </LinearLayout>
+
+        </LinearLayout>
+
 
         <Button
-            android:id="@+id/datePickerButton"
+            android:id="@+id/uploadImageButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Select Date" />
+            android:layout_marginTop="16dp"
+            android:background="#F3F3F3"
+            android:backgroundTint="#EBE7E7"
+            android:hapticFeedbackEnabled="false"
+            android:text="Upload Image"
+            app:rippleColor="#F4F3F3"
 
-        <Button
-            android:id="@+id/timePickerButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Select Time" />
+            />
 
-        <!-- Add other form fields as needed -->
 
         <Button
             android:id="@+id/submit_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Submit"
-            android:layout_gravity="center" />
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:text="Submit" />
 
 
     </LinearLayout>
