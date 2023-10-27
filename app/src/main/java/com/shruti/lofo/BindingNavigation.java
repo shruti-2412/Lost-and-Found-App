@@ -23,10 +23,14 @@ import androidx.navigation.ui.NavigationUI;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
 import com.shruti.lofo.databinding.ActivityBindNavBinding;
+import com.shruti.lofo.ui.AboutUs.AboutUsFragment;
+import com.shruti.lofo.ui.ContactUs.ContactUsFragment;
 import com.shruti.lofo.ui.DashBoard.DashBoardFragment;
 import com.shruti.lofo.ui.Found.FoundFragment;
 import com.shruti.lofo.ui.Help.HelpFragment;
 import com.shruti.lofo.ui.Lost.LostFragment;
+import com.shruti.lofo.ui.MyProfile.MyProfileFragment;
+import com.shruti.lofo.ui.PrivacyPolicy.PrivacyPolicyFragment;
 
 
 public class BindingNavigation extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -83,12 +87,26 @@ public class BindingNavigation extends AppCompatActivity implements NavigationVi
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int itemId = item.getItemId();
-        // Handle drawer item selection here
-//        if (itemId == R.id.drawer_item1) {
-//            // Perform action for drawer item 1
-//        } else if (itemId == R.id.drawer_item2) {
-//            // Perform action for drawer item 2
-//        }
+        if (itemId == R.id.myprofile_drawer) {
+            openFragment(new MyProfileFragment());
+        }
+        else if (itemId == R.id.lost_drawer) {
+            openFragment(new LostFragment());
+            highlightBottomNavigationItem(R.id.navigation_lost);
+        }
+        else if (itemId == R.id.found_drawer) {
+            openFragment(new FoundFragment());
+            highlightBottomNavigationItem(R.id.navigation_found);
+        }
+        else if (itemId == R.id.aboutus_drawer) {
+            openFragment(new AboutUsFragment());
+        }
+        else if (itemId == R.id.privacy_drawer) {
+            openFragment(new PrivacyPolicyFragment());
+        }
+        else if (itemId == R.id.contactus_drawer) {
+            openFragment(new ContactUsFragment());
+        }
 
         drawerlayout.closeDrawer(GravityCompat.START);
         return true;
@@ -107,6 +125,10 @@ public class BindingNavigation extends AppCompatActivity implements NavigationVi
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.fragment_container, fragment);
         transaction.commit();
+    }
+
+    private void highlightBottomNavigationItem(int itemId) {
+        bottomNavigationView.getMenu().findItem(itemId).setChecked(true);
     }
 }
 

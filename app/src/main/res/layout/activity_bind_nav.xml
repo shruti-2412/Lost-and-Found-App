@@ -41,21 +41,12 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent">
 
-            <com.google.android.material.bottomappbar.BottomAppBar
-                android:id="@+id/bottomAppBar"
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/nav_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:background="#ffffff">
-
-                <com.google.android.material.bottomnavigation.BottomNavigationView
-                    android:id="@+id/nav_view"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:menu="@menu/bottom_nav_menu"
-                    app:labelVisibilityMode="labeled"/>
-
-            </com.google.android.material.bottomappbar.BottomAppBar>
+                app:menu="@menu/bottom_nav_menu"
+                app:labelVisibilityMode="labeled"/>
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
