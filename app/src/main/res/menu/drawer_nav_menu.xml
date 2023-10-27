@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/myprofile_drawer"
+        android:title="My Profile"
+        android:icon="@drawable/myprofile_icon"/>
+
+    <item
+        android:id="@+id/lost_drawer"
+        android:title="Lost"
+        android:icon="@drawable/lost_icon"/>
+
+    <item
+        android:id="@+id/found_drawer"
+        android:title="Found"
+        android:icon="@drawable/found_icon"/>
+
+    <item
+        android:id="@+id/aboutus_drawer"
+        android:title="About Us"
+        android:icon="@drawable/aboutus_icon"/>
+
+    <item
+        android:id="@+id/privacy_drawer"
+        android:title="Privacy"
+        android:icon="@drawable/privacy_icon"/>
+
+    <item
+        android:id="@+id/contactus_drawer"
+        android:title="Contact Us"
+        android:icon="@drawable/contactus_icon"/>
+</menu>

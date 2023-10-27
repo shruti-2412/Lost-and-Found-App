@@ -6,14 +6,20 @@ import androidx.lifecycle.ViewModel;
 
 public class DashBoardViewModel extends ViewModel {
 
-    private final MutableLiveData<String> mText;
+    int img;
+    String name,description,posted_by;
+
+    public DashBoardViewModel(int img,String name,String description,String posted_by){
+        this.img = img;
+        this.name = name;
+        this.description = description;
+        this.posted_by = posted_by;
+    }
 
     public DashBoardViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is DashBoard fragment");
+
+//        mText = new MutableLiveData<>();
+//        mText.setValue("This is DashBoard fragment");
     }
 
-    public LiveData<String> getText() {
-        return mText;
-    }
 }
