@@ -3,22 +3,26 @@
 
     <item
         android:id="@+id/navigation_dashboard"
-        android:title="Home"/>
+        android:title="Home"
+        android:icon="@drawable/home_bottom_nav"/>
     <item
         android:id="@+id/navigation_lost"
-        android:title="@string/title_lost"/>
+        android:title="@string/title_lost"
+        android:icon="@drawable/lost_icon"/>
 <!--        android:icon="@drawable/ic_home_black_24dp"-->
 
 
     <item
         android:id="@+id/navigation_found"
-        android:title="@string/title_found"/>
+        android:title="@string/title_found"
+        android:icon="@drawable/found_icon"/>
 <!--        android:icon="@drawable/ic_dashboard_black_24dp"-->
 
 
     <item
         android:id="@+id/navigation_help"
-        android:title="@string/title_help"/>
+        android:title="@string/title_help"
+        android:icon="@drawable/help_bottom_nav"/>
 <!--        android:icon="@drawable/ic_notifications_black_24dp"-->
 
 
