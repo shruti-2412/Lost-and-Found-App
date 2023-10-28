@@ -1,9 +1,8 @@
-package com.shruti.lofo.ui.Lost;
+package com.shruti.lofo.ui.Found;
 
 import static android.app.Activity.RESULT_OK;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.app.TimePickerDialog;
 import android.content.Intent;
 
 import com.google.firebase.storage.FirebaseStorage;
@@ -22,15 +21,16 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
-import com.shruti.lofo.OnImageUploadCallback;
 import com.shruti.lofo.Utility;
 
 import com.google.firebase.firestore.DocumentReference;
 import com.shruti.lofo.R;
+import com.shruti.lofo.OnImageUploadCallback;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -38,12 +38,10 @@ import java.util.Date;
 import java.util.Locale;
 
 
-public class LostItemsFragment extends DialogFragment {
+public class FoundItemsFragment extends DialogFragment {
     private ImageButton datePickerButton;
 
-    private ImageButton timePickerButton;
     private EditText dateEdit;
-    private EditText timeEdit;
     private Spinner categorySpinner;
     ImageView image;
     Button upload;
@@ -66,7 +64,7 @@ public class LostItemsFragment extends DialogFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_lost_items, container, false);
+        return inflater.inflate(R.layout.fragment_found_items, container, false);
     }
 
     @Override
@@ -75,11 +73,8 @@ public class LostItemsFragment extends DialogFragment {
 
         description = view.findViewById(R.id.description);
         datePickerButton = view.findViewById(R.id.datePickerButton);
-        timePickerButton= view.findViewById(R.id.timePickerButton);
         datePickerButton.setOnClickListener(v -> showDatePicker());
-        timePickerButton.setOnClickListener(v -> showTimePicker());
         dateEdit= view.findViewById(R.id.selectedDateEditText);
-        timeEdit= view.findViewById(R.id.selectedTimeEditText);
         location= view.findViewById(R.id.location);
 
 
@@ -133,16 +128,15 @@ public class LostItemsFragment extends DialogFragment {
                 selectedCategory[0] = other.getText().toString();
             }
             String date = updateDateButton();
-            String time = updateTimeButton();
 
-            LostItems lostItem = new LostItems();
-            lostItem.setItemName(itemName);
-            lostItem.setCategory(selectedCategory[0]);
-            lostItem.setDateLost(date);
-            lostItem.setTimeLost(time);
 
-            lostItem.setLocation(location.getText().toString());
-            lostItem.setDescription(description.getText().toString());
+            FoundItems FoundItem = new FoundItems();
+            FoundItem.setItemName(itemName);
+            FoundItem.setCategory(selectedCategory[0]);
+            FoundItem.setDateFound(date);
+            FoundItem.setImageURI(imageUri.toString());
+            FoundItem.setLocation(location.getText().toString());
+            FoundItem.setDescription(description.getText().toString());
 
 
 //            FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -150,10 +144,10 @@ public class LostItemsFragment extends DialogFragment {
 //
 //            // for ownername, phnum, email, userId, fetch this from database
 //
-//            lostItem.setUserId(currentUser.getUid());
-//            lostItem.setEmail(currentUser.getEmail());
+//            FoundItem.setUserId(currentUser.getUid());
+//            FoundItem.setEmail(currentUser.getEmail());
 
-            saveItemToFirebase(lostItem);
+            saveItemToFirebase(FoundItem);
 
         });
 
@@ -165,7 +159,7 @@ public class LostItemsFragment extends DialogFragment {
     private void saveImageToFirebaseStorage(Uri imageUri, OnImageUploadCallback callback) {
 
         String imageName = generateImageName();
-        StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("images/" + imageName);
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("foundImages/" + imageName);
 
         storageReference.putFile(imageUri)
                 .addOnSuccessListener(taskSnapshot -> {
@@ -181,13 +175,13 @@ public class LostItemsFragment extends DialogFragment {
     }
 
 
-    private void saveItemToFirebase(LostItems item) {
+    private void saveItemToFirebase(FoundItems item) {
         try {
             saveImageToFirebaseStorage(imageUri, new OnImageUploadCallback() {
                 @Override
                 public void onSuccess(String imageUrl) {
                     item.setImageURI(imageUrl);
-                    DocumentReference documentReference = Utility.getCollectionReferrenceForItems2().document();
+                    DocumentReference documentReference = Utility.getCollectionReferrenceForFound().document();
                     documentReference.set(item).addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
                             Utility.showToast(getContext(), "Item added successfully");
@@ -243,41 +237,11 @@ public class LostItemsFragment extends DialogFragment {
         updateDateButton();
     }
 
-    private void showTimePicker() {
-        final Calendar c = Calendar.getInstance();
-        mHour = c.get(Calendar.HOUR_OF_DAY);
-        mMinute = c.get(Calendar.MINUTE);
-
-        TimePickerDialog timePickerDialog = new TimePickerDialog(requireContext(),
-                (view, hourOfDay, minute) -> {
-                    mHour = hourOfDay;
-                    mMinute = minute;
-                    updateTimeButton();
-                }, mHour, mMinute, false);
-        timePickerDialog.show();
-        updateTimeButton();
-    }
-
     private String updateDateButton() {
         String date = mDay + "/" + (mMonth + 1) + "/" + mYear;
         dateEdit.setText(date);
         return date;
     }
 
-    private String updateTimeButton() {
-        String AM_PM;
-        if (mHour < 12) {
-            AM_PM = "AM";
-        } else {
-            AM_PM = "PM";
-        }
-        int hour = mHour % 12;
-        if (hour == 0) {
-            hour = 12;
-        }
-        String time = hour + ":" + mMinute + " " + AM_PM;
-      timeEdit.setText(time);
-        return time;
-    }
-
 }
+

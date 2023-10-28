@@ -1,4 +1,4 @@
-package com.shruti.lofo.ui.Lost;
+package com.shruti.lofo.ui.Found;
 
 import android.content.Context;
 import com.bumptech.glide.Glide;
@@ -12,11 +12,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.shruti.lofo.R;
+import com.shruti.lofo.ui.Lost.LostItems;
 
-public class LostItemsAdapter extends FirestoreRecyclerAdapter<LostItems, LostItemsAdapter.ItemViewHolder> {
+public class FoundItemsAdapter extends FirestoreRecyclerAdapter<FoundItems, FoundItemsAdapter.ItemViewHolder> {
 
     Context context;
-    public LostItemsAdapter(@NonNull FirestoreRecyclerOptions<LostItems> options, Context context ) {
+    public FoundItemsAdapter(@NonNull FirestoreRecyclerOptions<FoundItems> options, Context context ) {
         super(options);
         this.context=context;
     }
@@ -24,12 +25,12 @@ public class LostItemsAdapter extends FirestoreRecyclerAdapter<LostItems, LostIt
     @NonNull
     @Override
     public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.lost_item_card, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.found_item_card, parent, false);
         return new ItemViewHolder(view);
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull ItemViewHolder holder, int position, @NonNull LostItems item) {
+    protected void onBindViewHolder(@NonNull ItemViewHolder holder, int position, @NonNull FoundItems item) {
         if (item.getImageURI() != null && !item.getImageURI().isEmpty()) {
             Glide.with(context)
                     .load(item.getImageURI())
@@ -38,10 +39,10 @@ public class LostItemsAdapter extends FirestoreRecyclerAdapter<LostItems, LostIt
                     .into(holder.itemImageView);
         }
         holder.itemNameTextView.setText(item.getItemName());
-        holder.ownerNameTextView.setText(item.getOwnerName());
+        holder.finderNameTextView.setText(item.getfinderName());
         holder.description.setText(item.getDescription());
         holder.location.setText(item.getLocation());
-        holder.date.setText(item.getDateLost());
+        holder.date.setText(item.getDateFound());
 
         // Set an onClickListener for the card view
         holder.itemView.setOnClickListener(v -> {
@@ -52,20 +53,19 @@ public class LostItemsAdapter extends FirestoreRecyclerAdapter<LostItems, LostIt
     static class ItemViewHolder extends RecyclerView.ViewHolder {
         ImageView itemImageView;
         TextView itemNameTextView;
-        TextView ownerNameTextView;
+        TextView finderNameTextView;
         TextView description;
         TextView location;
         TextView date;
-
 
         public ItemViewHolder(@NonNull View itemView) {
             super(itemView);
             itemImageView = itemView.findViewById(R.id.itemImageView);
             itemNameTextView = itemView.findViewById(R.id.itemNameTextView);
-            ownerNameTextView = itemView.findViewById(R.id.ownerNameTextView);
+            finderNameTextView = itemView.findViewById(R.id.finderNameTextView);
             description= itemView.findViewById(R.id.item_description);
             location = itemView.findViewById((R.id.location));
-            date = itemView.findViewById(R.id.dateLost);
+            date = itemView.findViewById(R.id.dateFound);
         }
     }
 }

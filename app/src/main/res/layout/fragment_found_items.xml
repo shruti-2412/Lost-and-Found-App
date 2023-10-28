@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="16dp"
-            android:text="Add details of your lost item"
+            android:text="Add details of the item you found"
             android:textAlignment="center"
             android:textColor="#735478"
             android:textSize="30sp"
@@ -54,7 +54,6 @@
             android:layout_marginBottom="16dp"
             android:background="@color/white"
             android:inputType="text" />
-
 
         <TextView
             android:layout_width="236dp"
@@ -104,7 +103,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#1A0F0F"
-                android:hint="Location at where you think you lost it!"></EditText>
+                android:hint="Location at where you found it!"></EditText>
         </androidx.appcompat.widget.LinearLayoutCompat>
 
         <LinearLayout
@@ -116,12 +115,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Select Date" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:text="Select Date of found" />
 
                 <ImageButton
                     android:id="@+id/datePickerButton"
@@ -139,33 +133,6 @@
                     android:textColor="#000000" />
             </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Select Time" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <ImageButton
-                    android:id="@+id/timePickerButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/baseline_access_time_24" />
-
-                <EditText
-                    android:id="@+id/selectedTimeEditText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="#291212"
-                    android:hint="Selected Time"
-                    android:inputType="none"
-                    android:textColor="#000000" />
-            </LinearLayout>
-
-        </LinearLayout>
 
 
         <Button
