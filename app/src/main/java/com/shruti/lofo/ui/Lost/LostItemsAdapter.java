@@ -1,7 +1,7 @@
 package com.shruti.lofo.ui.Lost;
 
 import android.content.Context;
-import android.net.Uri;
+import com.bumptech.glide.Glide;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,11 +30,18 @@ public class LostItemsAdapter extends FirestoreRecyclerAdapter<LostItems, LostIt
 
     @Override
     protected void onBindViewHolder(@NonNull ItemViewHolder holder, int position, @NonNull LostItems item) {
-        // Set image URI to itemImageView
-        // Assuming item.getImageURI() returns a valid image URI
-//        holder.itemImageView.setImageURI(Uri.parse(item.getImageURI()));
+        if (item.getImageURI() != null && !item.getImageURI().isEmpty()) {
+            Glide.with(context)
+                    .load(item.getImageURI())
+                    .placeholder(R.drawable.placeholder_image) // Add a placeholder image while the actual image is loading
+                    .error(R.drawable.baseline_image_search_24) // Add an error image if the image fails to load
+                    .into(holder.itemImageView);
+        }
         holder.itemNameTextView.setText(item.getItemName());
         holder.ownerNameTextView.setText(item.getOwnerName());
+        holder.description.setText(item.getDescription());
+        holder.location.setText(item.getLocation());
+        holder.date.setText(item.getDateLost());
 
         // Set an onClickListener for the card view
         holder.itemView.setOnClickListener(v -> {
@@ -46,12 +53,19 @@ public class LostItemsAdapter extends FirestoreRecyclerAdapter<LostItems, LostIt
         ImageView itemImageView;
         TextView itemNameTextView;
         TextView ownerNameTextView;
+        TextView description;
+        TextView location;
+        TextView date;
+
 
         public ItemViewHolder(@NonNull View itemView) {
             super(itemView);
-//            itemImageView = itemView.findViewById(R.id.itemImageView);
+            itemImageView = itemView.findViewById(R.id.itemImageView);
             itemNameTextView = itemView.findViewById(R.id.itemNameTextView);
             ownerNameTextView = itemView.findViewById(R.id.ownerNameTextView);
+            description= itemView.findViewById(R.id.item_description);
+            location = itemView.findViewById((R.id.location));
+            date = itemView.findViewById(R.id.dateLost);
         }
     }
 }

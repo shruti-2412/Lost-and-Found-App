@@ -1,39 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="8dp"
     app:cardCornerRadius="8dp">
 
-    <LinearLayout
-        android:layout_width="242dp"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:padding="16dp">
 
         <ImageView
             android:id="@+id/itemImageView"
-            android:layout_width="242dp"
-            android:layout_height="200dp"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="16dp"
+            android:adjustViewBounds="true"
             android:scaleType="centerCrop" />
 
         <TextView
             android:id="@+id/itemNameTextView"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:textSize="18sp" />
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@id/itemImageView"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/item_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/itemNameTextView"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@id/itemImageView"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/owner_label"
+            android:text="Owner"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/item_description"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@+id/itemImageView"
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/ownerNameTextView"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingStart="8dp"
-            android:paddingEnd="8dp"
-            android:paddingBottom="8dp"
+            android:layout_below="@id/item_description"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@id/owner_label"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/location_label"
+            android:textStyle="bold"
+            android:text="Location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ownerNameTextView"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@+id/itemImageView"
             android:textSize="14sp" />
 
-    </LinearLayout>
-</androidx.cardview.widget.CardView>
+        <TextView
+            android:id="@+id/location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ownerNameTextView"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@+id/location_label"
+            android:textSize="14sp" />
 
+        <TextView
+            android:id="@+id/datelost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/location"
+            android:text="Date Lost "
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@id/itemImageView"
+            android:textStyle="bold"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:id="@+id/dateLost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/location"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@+id/datelost"
+            android:textSize="14sp" />
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

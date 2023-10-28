@@ -5,7 +5,10 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
-import android.graphics.Color;
+
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -23,15 +26,17 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.shruti.lofo.OnImageUploadCallback;
 import com.shruti.lofo.Utility;
 
 import com.google.firebase.firestore.DocumentReference;
 import com.shruti.lofo.R;
+
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+
 
 public class LostItemsFragment extends DialogFragment {
     private ImageButton datePickerButton;
@@ -49,6 +54,7 @@ public class LostItemsFragment extends DialogFragment {
     private EditText location ;
 
     final int REQ_CODE=1000;
+    String imageUrl;
     private int mYear, mMonth, mDay, mHour, mMinute;
 
     @NonNull
@@ -106,7 +112,7 @@ public class LostItemsFragment extends DialogFragment {
             }
         });
 
-         upload = view.findViewById(R.id.uploadImageButton);
+        upload = view.findViewById(R.id.uploadImageButton);
 
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -134,48 +140,76 @@ public class LostItemsFragment extends DialogFragment {
             lostItem.setCategory(selectedCategory[0]);
             lostItem.setDateLost(date);
             lostItem.setTimeLost(time);
-            lostItem.setImageURI(imageUri.toString());
+
             lostItem.setLocation(location.getText().toString());
             lostItem.setDescription(description.getText().toString());
 
 
-            FirebaseAuth mAuth = FirebaseAuth.getInstance();
-            FirebaseUser currentUser = mAuth.getCurrentUser();
-
-            // for ownername, phnum, email, userId, fetch this from database
-
-            lostItem.setUserId(currentUser.getUid());
-            lostItem.setEmail(currentUser.getEmail());
+//            FirebaseAuth mAuth = FirebaseAuth.getInstance();
+//            FirebaseUser currentUser = mAuth.getCurrentUser();
+//
+//            // for ownername, phnum, email, userId, fetch this from database
+//
+//            lostItem.setUserId(currentUser.getUid());
+//            lostItem.setEmail(currentUser.getEmail());
 
             saveItemToFirebase(lostItem);
 
         });
 
     }
-    void saveItemToFirebase(LostItems item) {
-        try{
-        DocumentReference documentReference;
-        documentReference = Utility.getCollectionReferrenceForItems2().document();
-        documentReference.set(item).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()) {
-                    // notes is added
-                    Utility.showToast(getContext(), "Item added successfully");
-                   dismiss();
-                } else {
-                    Utility.showToast(getContext(), "Failed to add item");
-                    dismiss();
-                }
-            }
-        });
+    private String generateImageName() {
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
+        return "image_" + timeStamp + ".jpg";
     }
-        catch (Exception e) {
+    private void saveImageToFirebaseStorage(Uri imageUri, OnImageUploadCallback callback) {
+
+        String imageName = generateImageName();
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("images/" + imageName);
+
+        storageReference.putFile(imageUri)
+                .addOnSuccessListener(taskSnapshot -> {
+                    storageReference.getDownloadUrl().addOnSuccessListener(uri -> {
+                        String imageUrl = uri.toString();
+                        callback.onSuccess(imageUrl);
+                    });
+                })
+                .addOnFailureListener(e -> {
+                    // Handle any errors that may occur during the upload
+                    callback.onFailure();
+                });
+    }
+
+
+    private void saveItemToFirebase(LostItems item) {
+        try {
+            saveImageToFirebaseStorage(imageUri, new OnImageUploadCallback() {
+                @Override
+                public void onSuccess(String imageUrl) {
+                    item.setImageURI(imageUrl);
+                    DocumentReference documentReference = Utility.getCollectionReferrenceForItems2().document();
+                    documentReference.set(item).addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            Utility.showToast(getContext(), "Item added successfully");
+                            dismiss();
+                        } else {
+                            Utility.showToast(getContext(), "Failed to add item");
+                            dismiss();
+                        }
+                    });
+                }
+
+                @Override
+                public void onFailure() {
+                    Utility.showToast(getContext(), "An error occurred while uploading the image");
+                }
+            });
+        } catch (Exception e) {
             e.printStackTrace();
-            // Log the error or display a message to the user
             Utility.showToast(getContext(), "An error occurred while saving data");
         }
     }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -187,10 +221,10 @@ public class LostItemsFragment extends DialogFragment {
                 imageUri = data.getData();
                 upload.setText("Image added");
 
-
             }
         }
     }
+
 
     private void showDatePicker() {
         final Calendar c = Calendar.getInstance();

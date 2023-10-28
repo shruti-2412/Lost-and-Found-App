@@ -28,7 +28,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Item Name" />
+            android:text="Item Name"
+            android:textColor="#000000" />
 
         <EditText
             android:id="@+id/item_name_edittext"
@@ -37,12 +38,14 @@
             android:layout_marginBottom="13dp"
             android:background="@color/white"
             android:backgroundTint="#FFFFFF"
-            android:inputType="text" />
+            android:inputType="text"
+            android:textColor="#000000" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Description" />
+            android:text="Description"
+            android:textColor="#000000" />
 
         <EditText
             android:id="@+id/description"
@@ -56,16 +59,17 @@
         <TextView
             android:layout_width="236dp"
             android:layout_height="wrap_content"
-            android:text="Select category" />
+            android:text="Select category"
+            android:textColor="#000000" />
 
         <Spinner
             android:id="@+id/categorySpinner"
             android:layout_width="358dp"
             android:layout_height="34dp"
             android:layout_marginTop="10dp"
-            android:background="@color/black"
+            android:background="@color/white"
             android:backgroundTint="#FFFFFF"
-            android:hapticFeedbackEnabled="false" />
+            android:hapticFeedbackEnabled="true" />
 
         <EditText
             android:id="@+id/otherCategoryEditText"
@@ -81,7 +85,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Location" />
+            android:text="Location"
+            android:textColor="#000000" />
 
 
         <androidx.appcompat.widget.LinearLayoutCompat
@@ -130,7 +135,8 @@
                     android:layout_height="wrap_content"
                     android:backgroundTint="#573C3C"
                     android:hint="Selected Date"
-                    android:inputType="none" />
+                    android:inputType="none"
+                    android:textColor="#000000" />
             </LinearLayout>
 
             <TextView
@@ -155,7 +161,8 @@
                     android:layout_height="wrap_content"
                     android:backgroundTint="#291212"
                     android:hint="Selected Time"
-                    android:inputType="none" />
+                    android:inputType="none"
+                    android:textColor="#000000" />
             </LinearLayout>
 
         </LinearLayout>

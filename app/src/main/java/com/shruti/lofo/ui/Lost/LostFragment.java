@@ -26,8 +26,6 @@ import com.shruti.lofo.databinding.FragmentLostBinding;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.Query.Direction;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class LostFragment extends Fragment {
 
@@ -43,18 +41,15 @@ public class LostFragment extends Fragment {
         binding = FragmentLostBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-    recyclerView = root.findViewById(R.id.recyclerView);
-    setupRecyclerView();
+        recyclerView = root.findViewById(R.id.recyclerView);
+        setupRecyclerView();
 
-
-    addBtn = root.findViewById(R.id.add_lost);
+        addBtn = root.findViewById(R.id.add_lost);
 
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
 
 // Check if the user is logged in
-        if (currentUser != null) {
-            // User is logged in, allow them to add data
             addBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -63,10 +58,7 @@ public class LostFragment extends Fragment {
                     dialogFragment.show(getParentFragmentManager(), "form_dialog");
                 }
             });
-        } else {
-            Toast.makeText(getContext(), "Please log in to add data", Toast.LENGTH_SHORT).show();
 
-        }
 
         return root;
     }
