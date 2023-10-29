@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,6 +33,7 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (!validateEmail() | !validatePassword()) {
+                    Toast.makeText(Login.this, "Enter data in all fields", Toast.LENGTH_SHORT).show();
                 } else {
                     checkUser();
                 }
@@ -77,14 +80,14 @@ public class Login extends AppCompatActivity {
                     String passwordFromDB = snapshot.child(userEmail).child("password").getValue(String.class);
                     if (passwordFromDB.equals(userPassword)) {
                          loginEmail.setError(null);
-//                        String nameFromDB = snapshot.child(userName).child("name").getValue(String.class);
-//                        String emailFromDB = snapshot.child(userEmail).child("email").getValue(String.class);
-//                        String phoneFromDB = snapshot.child(userEmail).child("username").getValue(String.class);
+                        String nameFromDB = snapshot.child(userEmail).child("name").getValue(String.class);
+                        String emailFromDB = snapshot.child(userEmail).child("email").getValue(String.class);
+                        String phoneFromDB = snapshot.child(userEmail).child("phone").getValue(String.class);
                         Intent intent = new Intent(Login.this, MainActivity.class);
-//                        intent.putExtra("name", nameFromDB);
-//                        intent.putExtra("email", emailFromDB);
-//                        intent.putExtra("phone", phoneFromDB);
-//                        intent.putExtra("password", passwordFromDB);
+                        intent.putExtra("name", nameFromDB);
+                        intent.putExtra("email", emailFromDB);
+                        intent.putExtra("phone", phoneFromDB);
+                        intent.putExtra("password", passwordFromDB);
                         startActivity(intent);
                     } else {
                         loginPassword.setError("Invalid Credentials");

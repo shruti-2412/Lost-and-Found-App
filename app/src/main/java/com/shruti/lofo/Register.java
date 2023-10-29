@@ -37,7 +37,7 @@ public class Register extends AppCompatActivity {
                 String phone = signupPhone.getText().toString();
                 String password = signupPassword.getText().toString();
                 Register_helper helperClass = new Register_helper(name, email, phone, password);
-                reference.child(phone).setValue(helperClass);
+                reference.child(email).setValue(helperClass);
                 Toast.makeText(Register.this, "You have signup successfully!", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(Register.this, Login.class);
                 startActivity(intent);
