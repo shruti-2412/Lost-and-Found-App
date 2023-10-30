@@ -10,6 +10,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -67,40 +69,22 @@ public class Login extends AppCompatActivity {
             return true;
         }
     }
-    public void checkUser(){
+    public void checkUser() {
         String userEmail = loginEmail.getText().toString().trim();
         String userPassword = loginPassword.getText().toString().trim();
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
-        Query checkUserDatabase = reference.orderByChild("email").equalTo(userEmail);
-        checkUserDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()){
-                    loginEmail.setError(null);
-                    String passwordFromDB = snapshot.child(userEmail).child("password").getValue(String.class);
-                    if (passwordFromDB.equals(userPassword)) {
-                         loginEmail.setError(null);
-                        String nameFromDB = snapshot.child(userEmail).child("name").getValue(String.class);
-                        String emailFromDB = snapshot.child(userEmail).child("email").getValue(String.class);
-                        String phoneFromDB = snapshot.child(userEmail).child("phone").getValue(String.class);
-                        Intent intent = new Intent(Login.this, MainActivity.class);
-                        intent.putExtra("name", nameFromDB);
-                        intent.putExtra("email", emailFromDB);
-                        intent.putExtra("phone", phoneFromDB);
-                        intent.putExtra("password", passwordFromDB);
-                        startActivity(intent);
+
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        mAuth.signInWithEmailAndPassword(userEmail, userPassword)
+                .addOnCompleteListener(Login.this, task -> {
+                    if (task.isSuccessful()) {
+
                     } else {
-                        loginPassword.setError("Invalid Credentials");
-                        loginPassword.requestFocus();
+                        // If authentication fails, display a message to the user.
+                        Toast.makeText(Login.this, "Authentication failed.",
+                                Toast.LENGTH_SHORT).show();
                     }
-                } else {
-                    loginEmail.setError("User does not exist");
-                    loginEmail.requestFocus();
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
-        });
+                });
     }
+
+
 }
