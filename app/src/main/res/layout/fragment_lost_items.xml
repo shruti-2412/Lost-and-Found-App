@@ -9,7 +9,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#EFEDF2"
+        android:background="#EEEDF1"
         android:orientation="vertical"
         android:padding="16dp">
 
@@ -20,8 +20,8 @@
             android:layout_marginBottom="16dp"
             android:text="Add details of your lost item"
             android:textAlignment="center"
-            android:textColor="#735478"
-            android:textSize="30sp"
+            android:textColor="#8692F7"
+            android:textSize="24sp"
             android:textStyle="bold" />
 
 
@@ -33,8 +33,8 @@
 
         <EditText
             android:id="@+id/item_name_edittext"
-            android:layout_width="359dp"
-            android:layout_height="34dp"
+            android:layout_width="342dp"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="13dp"
             android:background="@color/white"
             android:backgroundTint="#FFFFFF"
@@ -49,8 +49,8 @@
 
         <EditText
             android:id="@+id/description"
-            android:layout_width="355dp"
-            android:layout_height="45dp"
+            android:layout_width="348dp"
+            android:layout_height="36dp"
             android:layout_marginBottom="16dp"
             android:background="@color/white"
             android:inputType="text" />
@@ -129,7 +129,7 @@
                     android:layout_height="wrap_content"
                     android:src="@drawable/baseline_date_range_24" />
 
-                <EditText
+                <TextView
                     android:id="@+id/selectedDateEditText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -155,7 +155,7 @@
                     android:layout_height="wrap_content"
                     android:src="@drawable/baseline_access_time_24" />
 
-                <EditText
+               <TextView
                     android:id="@+id/selectedTimeEditText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

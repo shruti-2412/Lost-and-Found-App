@@ -21,6 +21,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -41,7 +42,7 @@ import java.util.Locale;
 public class FoundItemsFragment extends DialogFragment {
     private ImageButton datePickerButton;
 
-    private EditText dateEdit;
+    private TextView dateEdit;
     private Spinner categorySpinner;
     ImageView image;
     Button upload;
@@ -50,6 +51,7 @@ public class FoundItemsFragment extends DialogFragment {
     EditText description;
     private EditText otherCategoryEditText;
     private EditText location ;
+    String date= null;
 
     final int REQ_CODE=1000;
     String imageUrl;
@@ -119,15 +121,64 @@ public class FoundItemsFragment extends DialogFragment {
         });
 
         Button submitButton = view.findViewById(R.id.submit_button);
+
         submitButton.setOnClickListener(v -> {
 
             EditText item =  view.findViewById(R.id.item_name_edittext);
             String itemName =  item.getText().toString();
+
             if(selectedCategory[0].equals("Other")){
                 EditText other =view.findViewById(R.id.otherCategoryEditText);
                 selectedCategory[0] = other.getText().toString();
             }
-            String date = updateDateButton();
+
+
+            // validation
+            if (itemName.isEmpty()) {
+                Utility.showToast(getContext(), "Name cannot be empty");
+                return;
+            }
+
+            // Check if category is selected
+            if (selectedCategory[0] == null) {
+                Utility.showToast(getContext(), "Please select a category");
+                return;
+            }
+
+            // If 'Other' is selected, ensure the field is not empty
+            if (selectedCategory[0].equals("Other")) {
+                EditText other = view.findViewById(R.id.otherCategoryEditText);
+                String otherCategory = other.getText().toString();
+                if (otherCategory.isEmpty()) {
+                    Utility.showToast(getContext(), "Other category cannot be empty");
+                    return;
+                }
+                selectedCategory[0] = otherCategory;
+            }
+
+            if (date == null) {
+                showDatePicker();
+                return;
+            }
+
+            // Check that location is not empty
+            String loc = location.getText().toString();
+            if (loc.isEmpty()) {
+                Utility.showToast(getContext(), "Please provide location");
+                return;
+            }
+
+            // Check that description is not empty
+            String desc = description.getText().toString();
+            if (desc.isEmpty()) {
+                Utility.showToast(getContext(), "Please add description");
+                return;
+            }
+
+            if(imageUri==null){
+                Utility.showToast(getContext(),"Please upload the image of the thing you found");
+                return;
+            }
 
 
             FoundItems FoundItem = new FoundItems();
@@ -240,6 +291,7 @@ public class FoundItemsFragment extends DialogFragment {
     private String updateDateButton() {
         String date = mDay + "/" + (mMonth + 1) + "/" + mYear;
         dateEdit.setText(date);
+        this.date=date;
         return date;
     }
 

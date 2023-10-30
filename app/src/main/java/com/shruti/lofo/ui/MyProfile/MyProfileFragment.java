@@ -30,15 +30,6 @@ public class MyProfileFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment MyProfileFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static MyProfileFragment newInstance(String param1, String param2) {
         MyProfileFragment fragment = new MyProfileFragment();
         Bundle args = new Bundle();

@@ -1,6 +1,5 @@
 package com.shruti.lofo;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -10,18 +9,21 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class Register extends AppCompatActivity {
     EditText signupName, signupPhone, signupEmail, signupPassword;
     TextView loginRedirectText;
     Button signupButton;
-    FirebaseFirestore database;
-    CollectionReference users;
+    FirebaseDatabase database;
+    DatabaseReference reference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,9 +34,6 @@ public class Register extends AppCompatActivity {
         signupPassword = findViewById(R.id.signup_password);
         loginRedirectText = findViewById(R.id.loginRedirectText);
         signupButton = findViewById(R.id.signup_button);
-
-        database = FirebaseFirestore.getInstance();
-        users = database.collection("users");
         signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -42,23 +41,40 @@ public class Register extends AppCompatActivity {
                 String email = signupEmail.getText().toString();
                 String phone = signupPhone.getText().toString();
                 String password = signupPassword.getText().toString();
-                Register_helper helperClass = new Register_helper(name, email, phone, password);
-                users.add(helperClass).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Toast.makeText(Register.this, "You have signup successfully!", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(Register.this, Login.class);
-                        startActivity(intent);
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(Register.this, "Fail to signup\n" + e.getMessage(), Toast.LENGTH_SHORT).show();
 
-                    }
-                });
+                FirebaseAuth mAuth = FirebaseAuth.getInstance();
+                mAuth.createUserWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(Register.this, task -> {
+                            if (task.isSuccessful()) {
+                                // User is successfully registered and authenticated.
+                                // Add the user's data to the Firestore database.
+                                FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+                                Map<String, Object> user = new HashMap<>();
+                                user.put("name", name);
+                                user.put("email", email);
+                                user.put("phone", phone);
+                                user.put("password", password);
+
+                                db.collection("users")
+                                        .add(user)
+                                        .addOnSuccessListener(documentReference -> {
+                                            Toast.makeText(Register.this, "You have signed up successfully!", Toast.LENGTH_SHORT).show();
+                                            Intent intent = new Intent(Register.this, Login.class);
+                                            startActivity(intent);
+                                        })
+                                        .addOnFailureListener(e -> {
+                                            // Handle any errors here
+                                        });
+                            } else {
+                                // If sign-up fails, display a message to the user.
+                                Toast.makeText(Register.this, "Registration failed.",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        });
             }
         });
+
         loginRedirectText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

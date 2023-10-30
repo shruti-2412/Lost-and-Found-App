@@ -22,6 +22,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
@@ -42,8 +44,8 @@ public class LostItemsFragment extends DialogFragment {
     private ImageButton datePickerButton;
 
     private ImageButton timePickerButton;
-    private EditText dateEdit;
-    private EditText timeEdit;
+    private TextView dateEdit;
+    private TextView timeEdit;
     private Spinner categorySpinner;
     ImageView image;
     Button upload;
@@ -56,6 +58,8 @@ public class LostItemsFragment extends DialogFragment {
     final int REQ_CODE=1000;
     String imageUrl;
     private int mYear, mMonth, mDay, mHour, mMinute;
+    String date = null;
+    String time = null;
 
     @NonNull
     @Override
@@ -108,7 +112,6 @@ public class LostItemsFragment extends DialogFragment {
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
                 // Handle the case when nothing is selected
-
             }
         });
 
@@ -124,6 +127,7 @@ public class LostItemsFragment extends DialogFragment {
         });
 
         Button submitButton = view.findViewById(R.id.submit_button);
+
         submitButton.setOnClickListener(v -> {
 
             EditText item =  view.findViewById(R.id.item_name_edittext);
@@ -132,8 +136,58 @@ public class LostItemsFragment extends DialogFragment {
                 EditText other =view.findViewById(R.id.otherCategoryEditText);
                 selectedCategory[0] = other.getText().toString();
             }
-            String date = updateDateButton();
-            String time = updateTimeButton();
+
+            // validation
+            if (itemName.isEmpty()) {
+                Utility.showToast(getContext(), "Name cannot be empty");
+                return;
+            }
+
+            // Check if category is selected
+            if (selectedCategory[0] == null) {
+                Utility.showToast(getContext(), "Please select a category");
+                return;
+            }
+
+            // If 'Other' is selected, ensure the field is not empty
+            if (selectedCategory[0].equals("Other")) {
+                EditText other = view.findViewById(R.id.otherCategoryEditText);
+                String otherCategory = other.getText().toString();
+                if (otherCategory.isEmpty()) {
+                    Utility.showToast(getContext(), "Other category cannot be empty");
+                    return;
+                }
+                selectedCategory[0] = otherCategory;
+            }
+
+            if (date == null) {
+                showDatePicker();
+                return;
+            }
+
+            if (time == null) {
+                showTimePicker();
+                return;
+            }
+
+            // Check that location is not empty
+            String loc = location.getText().toString();
+            if (loc.isEmpty()) {
+                Utility.showToast(getContext(), "Please provide location");
+                return;
+            }
+
+            // Check that description is not empty
+            String desc = description.getText().toString();
+            if (desc.isEmpty()) {
+                Utility.showToast(getContext(), "Please add description");
+                return;
+            }
+
+            if (imageUri == null) {
+                // Set the default image URI to the default image in the layout file
+                imageUri = Uri.parse("android.resource://com.shruti.lofo/drawable/sample_img");
+            }
 
             LostItems lostItem = new LostItems();
             lostItem.setItemName(itemName);
@@ -143,7 +197,6 @@ public class LostItemsFragment extends DialogFragment {
 
             lostItem.setLocation(location.getText().toString());
             lostItem.setDescription(description.getText().toString());
-
 
 //            FirebaseAuth mAuth = FirebaseAuth.getInstance();
 //            FirebaseUser currentUser = mAuth.getCurrentUser();
@@ -261,6 +314,7 @@ public class LostItemsFragment extends DialogFragment {
     private String updateDateButton() {
         String date = mDay + "/" + (mMonth + 1) + "/" + mYear;
         dateEdit.setText(date);
+        this.date = date;
         return date;
     }
 
@@ -277,6 +331,7 @@ public class LostItemsFragment extends DialogFragment {
         }
         String time = hour + ":" + mMinute + " " + AM_PM;
       timeEdit.setText(time);
+        this.time=time;
         return time;
     }
 
