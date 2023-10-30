@@ -69,6 +69,7 @@ public class Login extends AppCompatActivity {
             return true;
         }
     }
+
     public void checkUser() {
         String userEmail = loginEmail.getText().toString().trim();
         String userPassword = loginPassword.getText().toString().trim();
