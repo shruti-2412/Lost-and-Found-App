@@ -26,7 +26,7 @@ public class Register_helper {
     public void setPassword(String password) {
         this.password = password;
     }
-    public Register_helper(String name, String email, String username, String password) {
+    public Register_helper(String name, String email, String phone, String password) {
         this.name = name;
         this.email = email;
         this.phone = phone;

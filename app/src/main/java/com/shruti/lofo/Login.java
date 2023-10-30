@@ -1,6 +1,5 @@
 package com.shruti.lofo;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,17 +9,20 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class Login extends AppCompatActivity {
     EditText loginEmail, loginPassword;
     Button loginButton;
     TextView signupRedirectText;
+    FirebaseFirestore database;
+    CollectionReference users;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +31,9 @@ public class Login extends AppCompatActivity {
         loginPassword = findViewById(R.id.login_password);
         loginButton = findViewById(R.id.login_button);
         signupRedirectText = findViewById(R.id.signupRedirectText);
+        database = FirebaseFirestore.getInstance();
+        users = database.collection("users");
+
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -68,22 +73,24 @@ public class Login extends AppCompatActivity {
         }
     }
     public void checkUser(){
-        String userEmail = loginEmail.getText().toString().trim();
+        String UserEmail = loginEmail.getText().toString().trim();
         String userPassword = loginPassword.getText().toString().trim();
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
-        Query checkUserDatabase = reference.orderByChild("email").equalTo(userEmail);
-        checkUserDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+        CollectionReference reference = FirebaseFirestore.getInstance().collection("users");
+        Query checkUserDatabase = reference.whereEqualTo("email", UserEmail);
+
+        checkUserDatabase.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()){
-                    loginEmail.setError(null);
-                    String passwordFromDB = snapshot.child(userEmail).child("password").getValue(String.class);
+            public void onSuccess(QuerySnapshot snapshot) {
+                if (!snapshot.isEmpty()) {
+                    DocumentSnapshot document = snapshot.getDocuments().get(0);
+                    String passwordFromDB = document.getString("password");
+
                     if (passwordFromDB.equals(userPassword)) {
-                         loginEmail.setError(null);
-                        String nameFromDB = snapshot.child(userEmail).child("name").getValue(String.class);
-                        String emailFromDB = snapshot.child(userEmail).child("email").getValue(String.class);
-                        String phoneFromDB = snapshot.child(userEmail).child("phone").getValue(String.class);
-                        Intent intent = new Intent(Login.this, MainActivity.class);
+                        String nameFromDB = document.getString("name");
+                        String emailFromDB = document.getString("email");
+                        String phoneFromDB = document.getString("phone");
+
+                        Intent intent = new Intent(Login.this, BindingNavigation.class);
                         intent.putExtra("name", nameFromDB);
                         intent.putExtra("email", emailFromDB);
                         intent.putExtra("phone", phoneFromDB);
@@ -97,9 +104,6 @@ public class Login extends AppCompatActivity {
                     loginEmail.setError("User does not exist");
                     loginEmail.requestFocus();
                 }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
             }
         });
     }
