@@ -78,11 +78,12 @@ public class Login extends AppCompatActivity {
         mAuth.signInWithEmailAndPassword(userEmail, userPassword)
                 .addOnCompleteListener(Login.this, task -> {
                     if (task.isSuccessful()) {
-
+                        Toast.makeText(Login.this, "Login Successfully!", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(Login.this, BindingNavigation.class);
+                        startActivity(intent);
                     } else {
                         // If authentication fails, display a message to the user.
-                        Toast.makeText(Login.this, "Authentication failed.",
-                                Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Login.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
