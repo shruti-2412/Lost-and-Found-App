@@ -12,14 +12,28 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.shruti.lofo.R;
-import com.shruti.lofo.ui.Lost.LostItems;
+
 
 public class FoundItemsAdapter extends FirestoreRecyclerAdapter<FoundItems, FoundItemsAdapter.ItemViewHolder> {
 
     Context context;
-    public FoundItemsAdapter(@NonNull FirestoreRecyclerOptions<FoundItems> options, Context context ) {
+
+    private String category;
+
+
+
+    public FoundItemsAdapter(@NonNull FirestoreRecyclerOptions<FoundItems> options, Context context, String category) {
         super(options);
-        this.context=context;
+        this.context = context;
+        this.category = category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getCategory() {
+        return category;
     }
 
     @NonNull
@@ -31,23 +45,25 @@ public class FoundItemsAdapter extends FirestoreRecyclerAdapter<FoundItems, Foun
 
     @Override
     protected void onBindViewHolder(@NonNull ItemViewHolder holder, int position, @NonNull FoundItems item) {
-        if (item.getImageURI() != null && !item.getImageURI().isEmpty()) {
-            Glide.with(context)
-                    .load(item.getImageURI())
-                    .placeholder(R.drawable.placeholder_image) // Add a placeholder image while the actual image is loading
-                    .error(R.drawable.baseline_image_search_24) // Add an error image if the image fails to load
-                    .into(holder.itemImageView);
-        }
-        holder.itemNameTextView.setText(item.getItemName());
-        holder.finderNameTextView.setText(item.getfinderName());
-        holder.description.setText(item.getDescription());
-        holder.location.setText(item.getLocation());
-        holder.date.setText(item.getDateFound());
+      if(category.isEmpty() || item.getCategory().equals(category))  {
+            if (item.getImageURI() != null && !item.getImageURI().isEmpty()) {
+                Glide.with(context)
+                        .load(item.getImageURI())
+                        .placeholder(R.drawable.placeholder_image) // Add a placeholder image while the actual image is loading
+                        .error(R.drawable.baseline_image_search_24) // Add an error image if the image fails to load
+                        .into(holder.itemImageView);
+            }
+            holder.itemNameTextView.setText(item.getItemName());
+            holder.finderNameTextView.setText(item.getfinderName());
+            holder.description.setText(item.getDescription());
+            holder.location.setText(item.getLocation());
+            holder.date.setText(item.getDateFound());
 
-        // Set an onClickListener for the card view
-        holder.itemView.setOnClickListener(v -> {
-            // Perform action when the card is clicked
-        });
+            // Set an onClickListener for the card view
+            holder.itemView.setOnClickListener(v -> {
+                // Perform action when the card is clicked
+            });
+        }
     }
 
     static class ItemViewHolder extends RecyclerView.ViewHolder {

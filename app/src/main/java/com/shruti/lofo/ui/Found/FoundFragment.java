@@ -5,6 +5,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -37,62 +41,123 @@ public class FoundFragment extends Fragment {
     FloatingActionButton addBtn;
     RecyclerView recyclerView;
     FoundItemsAdapter adapter;
+    TextView filter;
+    String selectedCategory = "";
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-
         binding = FragmentFoundBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-
         recyclerView = root.findViewById(R.id.recyclerView);
-        setupRecyclerView();
 
         addBtn = root.findViewById(R.id.add_found);
-
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
 
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Perform the desired action here
                 FoundItemsFragment dialogFragment = new FoundItemsFragment();
                 dialogFragment.show(getParentFragmentManager(), "form_dialog");
             }
         });
 
+        filter = root.findViewById(R.id.filterButton);
+        Spinner categorySpinner = root.findViewById(R.id.categorySpinner);
+
+        filter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (categorySpinner.getVisibility() == View.VISIBLE) {
+                    categorySpinner.setVisibility(View.GONE);
+                } else {
+                    categorySpinner.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+        ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(getContext(),
+                R.array.categories_array, android.R.layout.simple_spinner_item);
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        categorySpinner.setAdapter(spinnerAdapter);
+
+        categorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedCategory = parent.getItemAtPosition(position).toString();
+                setupRecyclerView();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                selectedCategory = "";
+                setupRecyclerView();
+            }
+        });
+
+        setupRecyclerView();
 
         return root;
     }
-    void setupRecyclerView(){
-        Query query = Utility.getCollectionReferrenceForFound().orderBy("dateFound",Query.Direction.DESCENDING);
-        FirestoreRecyclerOptions <FoundItems> options = new FirestoreRecyclerOptions.Builder<FoundItems>()
-                .setQuery(query,FoundItems.class).build();
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
-        // Set the adapter
-        adapter = new FoundItemsAdapter(options, requireContext());
-        recyclerView.setAdapter(adapter);
+    void setupRecyclerView() {
+        Query query;
+        if (selectedCategory.isEmpty()) {
+            query = Utility.getCollectionReferrenceForFound().orderBy("dateFound", Query.Direction.DESCENDING);
+        } else {
+            query = Utility.getCollectionReferrenceForFound().whereEqualTo("category", selectedCategory)
+                    .orderBy("dateFound", Query.Direction.DESCENDING);
+        }
+        query.get().addOnSuccessListener(queryDocumentSnapshots -> {
+            for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                Log.d("FoundFragment", "Document ID: " + documentSnapshot.getId());
+                // Log other fields to ensure that the data is retrieved correctly
+            }
+        }).addOnFailureListener(e -> {
+            Log.e("FoundFragment", "Error fetching data: " + e.getMessage());
+        });
+
+        FirestoreRecyclerOptions<FoundItems> options = new FirestoreRecyclerOptions.Builder<FoundItems>()
+                .setQuery(query, FoundItems.class).build();
+
+        // Reinitialize the adapter only if it is null or the category has changed
+        if (adapter == null || !adapter.getCategory().equals(selectedCategory)) {
+            if (adapter != null) {
+                adapter.stopListening();
+            }
+
+            adapter = new FoundItemsAdapter(options, requireContext(), selectedCategory);
+            adapter.setCategory(selectedCategory);
+
+            recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+            recyclerView.setAdapter(adapter);
+            adapter.startListening();
+        } else {
+            adapter.updateOptions(options);
+        }
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        adapter.startListening();
+        if (adapter != null) {
+            adapter.startListening();
+        }
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        adapter.stopListening();
+        if (adapter != null) {
+            adapter.stopListening();
+        }
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        adapter.notifyDataSetChanged();
+        if (adapter != null) {
+            adapter.notifyDataSetChanged();
+        }
     }
-
 }

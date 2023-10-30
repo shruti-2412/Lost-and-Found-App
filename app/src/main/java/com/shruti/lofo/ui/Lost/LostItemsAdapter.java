@@ -12,13 +12,28 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.shruti.lofo.R;
+import com.shruti.lofo.ui.Lost.LostItems;
 
 public class LostItemsAdapter extends FirestoreRecyclerAdapter<LostItems, LostItemsAdapter.ItemViewHolder> {
 
     Context context;
-    public LostItemsAdapter(@NonNull FirestoreRecyclerOptions<LostItems> options, Context context ) {
+    private String category;
+
+
+
+    public LostItemsAdapter(@NonNull FirestoreRecyclerOptions<LostItems> options, Context context, String category) {
         super(options);
-        this.context=context;
+        this.context = context;
+        this.category = category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getCategory() {
+        return category;
+
     }
 
     @NonNull
@@ -30,6 +45,7 @@ public class LostItemsAdapter extends FirestoreRecyclerAdapter<LostItems, LostIt
 
     @Override
     protected void onBindViewHolder(@NonNull ItemViewHolder holder, int position, @NonNull LostItems item) {
+        if(category.isEmpty() || item.getCategory().equals(category))  {
         if (item.getImageURI() != null && !item.getImageURI().isEmpty()) {
             Glide.with(context)
                     .load(item.getImageURI())
@@ -47,6 +63,7 @@ public class LostItemsAdapter extends FirestoreRecyclerAdapter<LostItems, LostIt
         holder.itemView.setOnClickListener(v -> {
             // Perform action when the card is clicked
         });
+    }
     }
 
     static class ItemViewHolder extends RecyclerView.ViewHolder {
