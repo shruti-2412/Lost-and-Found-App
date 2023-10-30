@@ -38,4 +38,17 @@
                 android:title="Contact Us"
                 android:icon="@drawable/contactus_icon"/>
     </group>
+
+    <item
+        android:title="">
+
+        <menu>
+            <item
+                android:id="@+id/logout_drawer"
+                android:title="Logout"
+                android:icon="@drawable/logout_icon"/>
+        </menu>
+
+    </item>
+
 </menu>

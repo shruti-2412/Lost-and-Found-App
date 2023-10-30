@@ -3,6 +3,7 @@ package com.shruti.lofo;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -101,6 +102,9 @@ public class BindingNavigation extends AppCompatActivity implements NavigationVi
         }
         else if (itemId == R.id.contactus_drawer) {
             openFragment(new ContactUsFragment());
+        }
+        else if (itemId == R.id.logout_drawer) {
+            Toast.makeText(this,"Logout Sucessfully",Toast.LENGTH_SHORT).show();
         }
 
         drawerlayout.closeDrawer(GravityCompat.START);

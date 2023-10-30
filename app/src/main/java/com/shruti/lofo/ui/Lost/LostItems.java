@@ -8,21 +8,22 @@ public class LostItems {
     private String dateLost;
     private String location;
     private String email; // fetch from db
-    private String phnum; // fetch from db
+    private Long phnum; // fetch from db
     private String description;
     private String timeLost;
     private String imageURI;
+    private String tag = "Lost";
 
 
     public String getEmail() {
         return email;
     }
 
-    public String getPhnum() {
+    public Long getPhnum() {
         return phnum;
     }
 
-    public void setPhnum(String phnum) {
+    public void setPhnum(Long phnum) {
         this.phnum = phnum;
     }
 
@@ -41,6 +42,7 @@ public class LostItems {
         return description;
     }
 
+    public String getTag(){return tag;};
     public void setDescription(String description) {
         this.description = description;
     }
