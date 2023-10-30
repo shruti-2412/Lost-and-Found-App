@@ -11,6 +11,7 @@ public class FoundItems {
     private String phnum; // fetch from db
     private String description;
     private String imageURI;
+    private String tag = "Found";
     public String getEmail() {
         return email;
     }
@@ -36,6 +37,7 @@ public class FoundItems {
     public String getDescription() {
         return description;
     }
+    public String getTag(){return tag;};
 
     public void setDescription(String description) {
         this.description = description;
