@@ -21,7 +21,7 @@ import com.shruti.lofo.R;
 public class LostDetails extends AppCompatActivity {
 
     private ImageView img;
-    private TextView title, address, mail, description, ownerName, phnum, dateLost, time, category;
+    private TextView title, address, mail, description, ownerName, phnumText, dateLost, time, category;
     private Button call, sms, backBtn;
     private FirebaseFirestore db; // Initialize Fire Store
 
@@ -40,7 +40,7 @@ public class LostDetails extends AppCompatActivity {
         mail = findViewById(R.id.mail);
         description = findViewById(R.id.description);
         ownerName = findViewById(R.id.ownerName);
-        phnum = findViewById(R.id.phnum);
+        phnumText = findViewById(R.id.phnum);
         dateLost = findViewById(R.id.dateLost);
         category = findViewById(R.id.category);
         time = findViewById(R.id.timeLost);
@@ -71,7 +71,6 @@ public class LostDetails extends AppCompatActivity {
                                 String itemMail = documentSnapshot.getString("email");
                                 String itemDescription = documentSnapshot.getString("description");
                                 String itemOwnerName = documentSnapshot.getString("ownerName");
-                                String itemPhnum = documentSnapshot.getString("phnum");
                                 String itemDateLost = documentSnapshot.getString("dateLost");
 
                                 // Load the image using Glide and adjust the ImageView size
@@ -90,7 +89,6 @@ public class LostDetails extends AppCompatActivity {
                                 mail.setText(itemMail);
                                 description.setText(itemDescription);
                                 ownerName.setText(itemOwnerName);
-                                phnum.setText(itemPhnum);
                                 dateLost.setText(itemDateLost);
                             } else {
                                 Toast.makeText(LostDetails.this, "Data not found!", Toast.LENGTH_SHORT).show();
@@ -108,7 +106,7 @@ public class LostDetails extends AppCompatActivity {
         call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String phoneNumber = phnum.getText().toString();
+                String phoneNumber = phnumText.getText().toString();
                 // When the Call button is clicked, open the phone dialer
                 Intent intent = new Intent(Intent.ACTION_DIAL);
                 intent.setData(Uri.parse("tel:" + phoneNumber));
@@ -120,7 +118,7 @@ public class LostDetails extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                String phoneNumber = phnum.getText().toString();
+                String phoneNumber = phnumText.getText().toString();
                 // When the SMS button is clicked, open the SMS app
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.setData(Uri.parse("sms:" + phoneNumber));
