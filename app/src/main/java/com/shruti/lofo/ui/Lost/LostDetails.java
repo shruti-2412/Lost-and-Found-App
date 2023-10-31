@@ -1,5 +1,6 @@
 package com.shruti.lofo.ui.Lost;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 
@@ -21,11 +22,13 @@ import com.shruti.lofo.R;
 public class LostDetails extends AppCompatActivity {
 
     private ImageView img;
-    private TextView title, address, mail, description, ownerName, phnumText, dateLost, time, category;
+    private TextView title, address, mail, description, ownerName, dateLost, time, category, timeLost;
     private Button call, sms, backBtn;
+    String phoneNum;
     private FirebaseFirestore db; // Initialize Fire Store
 
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,13 +43,13 @@ public class LostDetails extends AppCompatActivity {
         mail = findViewById(R.id.mail);
         description = findViewById(R.id.description);
         ownerName = findViewById(R.id.ownerName);
-        phnumText = findViewById(R.id.phnum);
         dateLost = findViewById(R.id.dateLost);
         category = findViewById(R.id.category);
         time = findViewById(R.id.timeLost);
         call = findViewById(R.id.call);
         sms = findViewById(R.id.sms);
         backBtn = findViewById(R.id.backBtn);
+        timeLost = findViewById(R.id.timeLost);
 
         String itemId = getIntent().getStringExtra("itemId"); // Assuming you pass the itemName as an extra
 
@@ -72,6 +75,9 @@ public class LostDetails extends AppCompatActivity {
                                 String itemDescription = documentSnapshot.getString("description");
                                 String itemOwnerName = documentSnapshot.getString("ownerName");
                                 String itemDateLost = documentSnapshot.getString("dateLost");
+                                String phone = String.valueOf(documentSnapshot.getLong("phnum")) ;
+                                String itemtimeLost = documentSnapshot.getString("timeLost");
+                                String categ = documentSnapshot.getString("category");
 
                                 // Load the image using Glide and adjust the ImageView size
                                 if (imageUrl != null && !imageUrl.isEmpty()) {
@@ -90,6 +96,9 @@ public class LostDetails extends AppCompatActivity {
                                 description.setText(itemDescription);
                                 ownerName.setText(itemOwnerName);
                                 dateLost.setText(itemDateLost);
+                                timeLost.setText(itemtimeLost);
+                                category.setText(categ);
+                                phoneNum=phone;
                             } else {
                                 Toast.makeText(LostDetails.this, "Data not found!", Toast.LENGTH_SHORT).show();
                             }
@@ -106,10 +115,10 @@ public class LostDetails extends AppCompatActivity {
         call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String phoneNumber = phnumText.getText().toString();
+
                 // When the Call button is clicked, open the phone dialer
                 Intent intent = new Intent(Intent.ACTION_DIAL);
-                intent.setData(Uri.parse("tel:" + phoneNumber));
+                intent.setData(Uri.parse("tel:" + phoneNum));
                 startActivity(intent);
             }
         });
@@ -118,10 +127,10 @@ public class LostDetails extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                String phoneNumber = phnumText.getText().toString();
+
                 // When the SMS button is clicked, open the SMS app
                 Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse("sms:" + phoneNumber));
+                intent.setData(Uri.parse("sms:" + phoneNum));
                 intent.putExtra("sms_body", "Hello, I want to inquire about your lost item.");
                 startActivity(intent);
             }
