@@ -14,10 +14,14 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="18dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="18dp"
+        android:background="@drawable/border_shape"
+        android:padding="5dp"
+        android:shadowColor="#CEC1D0"
         android:text="Filter by Category"
-        />
+        android:textColor="#332C34" />
+
 
     <Spinner
         android:id="@+id/categorySpinner"
@@ -30,10 +34,11 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="898dp"
         android:layout_above="@id/add_found"
         android:layout_below="@id/categorySpinner"
-        android:layout_marginBottom="16dp" />
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="-72dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add_found"
@@ -41,8 +46,11 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:background="#FFFFFF"
-        android:backgroundTint="@color/white"
-        android:src="@drawable/baseline_add_24" />
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/fab_border"
+        android:src="@drawable/baseline_add_24"
+        app:backgroundTint="#FFFFFF" />
+
 
 </RelativeLayout>
