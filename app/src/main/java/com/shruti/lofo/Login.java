@@ -3,6 +3,7 @@ package com.shruti.lofo;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -31,6 +32,17 @@ public class Login extends AppCompatActivity {
         loginPassword = findViewById(R.id.login_password);
         loginButton = findViewById(R.id.login_button);
         signupRedirectText = findViewById(R.id.signupRedirectText);
+
+        // Check if the user is already logged in
+        SharedPreferences sharedPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
+        boolean isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false);
+
+        if (isLoggedIn) {
+            // User is already logged in, navigate to the main activity
+            Intent intent = new Intent(this, BindingNavigation.class);
+            startActivity(intent);
+            finish(); // Close the current activity to prevent going back to the main activity without login
+        }
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -79,6 +91,13 @@ public class Login extends AppCompatActivity {
                 .addOnCompleteListener(Login.this, task -> {
                     if (task.isSuccessful()) {
                         Toast.makeText(Login.this, "Login Successfully!", Toast.LENGTH_SHORT).show();
+
+                        // Update the shared preferences to indicate that the user is now logged in
+                        SharedPreferences sharedPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putBoolean("isLoggedIn", true);
+                        editor.apply();
+
                         Intent intent = new Intent(Login.this, BindingNavigation.class);
                         startActivity(intent);
                     } else {

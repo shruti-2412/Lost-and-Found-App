@@ -50,7 +50,7 @@ public class FoundFragment extends Fragment {
         binding = FragmentFoundBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        recyclerView = root.findViewById(R.id.recyclerView);
+        recyclerView = root.findViewById(R.id.foundRecyclerView);
 
         addBtn = root.findViewById(R.id.add_found);
 

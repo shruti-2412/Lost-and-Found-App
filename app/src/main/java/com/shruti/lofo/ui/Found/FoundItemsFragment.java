@@ -203,6 +203,7 @@ public class FoundItemsFragment extends DialogFragment {
 
             if (currentUser != null) {
                 String userEmail = currentUser.getEmail();
+                String userID = currentUser.getUid();
 
                 // Query the user collection for the current user's details based on their email
                 db.collection("users")
@@ -217,6 +218,7 @@ public class FoundItemsFragment extends DialogFragment {
                                     FoundItem.setfinderName(userName);
                                     FoundItem.setPhnum(userPhone);
                                     FoundItem.setEmail(userEmail);
+                                    FoundItem.setfinderId(userID);
                                 }
                             } else {
                                 Log.d(TAG, "Error getting documents: ", task.getException());

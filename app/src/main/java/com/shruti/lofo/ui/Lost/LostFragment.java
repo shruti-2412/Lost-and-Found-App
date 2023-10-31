@@ -48,7 +48,7 @@ public class LostFragment extends Fragment {
         binding = FragmentLostBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        recyclerView = root.findViewById(R.id.recyclerView);
+        recyclerView = root.findViewById(R.id.lostRecyclerView);
         setupRecyclerView();
 
         addBtn = root.findViewById(R.id.add_lost);
