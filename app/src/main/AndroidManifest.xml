@@ -43,5 +43,16 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
+        <activity
+            android:name=".ui.Lost.LostDetails"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".ui.Found.FoundDetails"
+            android:exported="true">
+        </activity>
+
     </application>
 </manifest>
