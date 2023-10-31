@@ -211,6 +211,7 @@ public class LostItemsFragment extends DialogFragment {
 
             if (currentUser != null) {
                 String userEmail = currentUser.getEmail();
+                String userID = currentUser.getUid();
 
                 // Query the user collection for the current user's details based on their email
                 db.collection("users")
@@ -225,6 +226,7 @@ public class LostItemsFragment extends DialogFragment {
                                     lostItem.setOwnerName(userName);
                                     lostItem.setPhnum(Long.valueOf(userPhone));
                                     lostItem.setEmail(userEmail);
+                                    lostItem.setUserId(userID);
                                 }
                             } else {
                                 Log.d(TAG, "Error getting documents: ", task.getException());
