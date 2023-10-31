@@ -7,14 +7,14 @@
 
     <ImageView
         android:id="@+id/img"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="170dp"
+        android:layout_height="140dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.500"
+        app:layout_constraintHorizontal_bias="0.518"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.070"
+        app:layout_constraintVertical_bias="0.035"
         tools:srcCompat="@tools:sample/avatars" />
 
     <Button
@@ -155,11 +155,10 @@
         app:layout_constraintVertical_bias="0.530" />
 
 
-
     <TextView
         android:id="@+id/descriptionText"
-        android:layout_width="56dp"
-        android:layout_height="21dp"
+        android:layout_width="96dp"
+        android:layout_height="20dp"
         android:text="Description"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -168,18 +167,18 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.780" />
 
+
     <TextView
         android:id="@+id/description"
-        android:layout_width="70dp"
-        android:layout_height="20dp"
+        android:layout_width="119dp"
+        android:layout_height="15dp"
+        android:inputType="textLongMessage"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.450"
+        app:layout_constraintHorizontal_bias="0.647"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.780" />
-
-
+        app:layout_constraintVertical_bias="0.775" />
 
     <TextView
         android:id="@+id/ownerNameText"
@@ -199,13 +198,13 @@
         android:id="@+id/ownerName"
         android:layout_width="70dp"
         android:layout_height="20dp"
+        android:textColor="?android:colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.450"
+        app:layout_constraintHorizontal_bias="0.527"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.590"
-        android:textColor="?android:colorPrimary" />
+        app:layout_constraintVertical_bias="0.589" />
 
     <TextView
         android:id="@+id/categoryText"
@@ -244,17 +243,17 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.700" />
 
+
     <TextView
         android:id="@+id/phnum"
         android:layout_width="70dp"
         android:layout_height="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.450"
+        app:layout_constraintHorizontal_bias="0.554"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.700" />
-
+        app:layout_constraintVertical_bias="0.699" />
 
     <TextView
         android:id="@+id/timeLostText"

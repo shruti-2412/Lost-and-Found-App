@@ -77,7 +77,7 @@ public class LostDetails extends AppCompatActivity {
                                 String itemPhNum = documentSnapshot.getString("phone");
                                 String itemDateLost = documentSnapshot.getString("dateLost");
 
-                                // Load the image using Glide
+                                // Load the image using Glide and adjust the ImageView size
                                 if (imageUrl != null && !imageUrl.isEmpty()) {
                                     Glide.with(LostDetails.this)
                                             .load(imageUrl)
@@ -85,6 +85,7 @@ public class LostDetails extends AppCompatActivity {
                                             .error(R.drawable.baseline_image_search_24)
                                             .into(img);
                                 }
+
 
                                 // Set data to TextViews
                                 title.setText(itemTitle);

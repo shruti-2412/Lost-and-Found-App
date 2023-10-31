@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -16,6 +17,8 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.shruti.lofo.R;
 
 public class FoundDetails extends AppCompatActivity {
@@ -46,50 +49,59 @@ public class FoundDetails extends AppCompatActivity {
         callBtn = findViewById(R.id.call);
         smsBtn = findViewById(R.id.sms);
 
-        // Get the item ID from the Intent
         String itemId = getIntent().getStringExtra("itemId");
 
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        // Perform a query to find the document with the specific itemName
+        Query query = db.collection("foundItems").whereEqualTo("itemName", itemId);
 
-        // Fetch item details from Fire store based on the itemId
-        DocumentReference itemRef = db.collection("foundItems").document(itemId);
-        itemRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-
+        query.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                if (documentSnapshot.exists()) {
-                    String imageUrl = documentSnapshot.getString("imageURI");
-                    String itemName = documentSnapshot.getString("itemName");
-                    String itemLocation = documentSnapshot.getString("location");
-                    String itemEmail = documentSnapshot.getString("email");
-                    String itemDescription = documentSnapshot.getString("description");
-                    String itemOwner = documentSnapshot.getString("finderName");
-                    String itemPhnum = documentSnapshot.getString("phnum");
-                    String itemIate = documentSnapshot.getString("date");
-                    String itemCategory = documentSnapshot.getString("category");
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                if (!queryDocumentSnapshots.isEmpty()) {
+                    // Get the document reference for the first (or only) document with the matching itemName
+                    DocumentReference itemRef = queryDocumentSnapshots.getDocuments().get(0).getReference();
 
+                    // Now you can use this itemRef to fetch the document and display its details
+                    itemRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                        @Override
+                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                            if (documentSnapshot.exists()) {
+                                String imageUrl = documentSnapshot.getString("imageURI");
+                                String itemName = documentSnapshot.getString("itemName");
+                                String itemLocation = documentSnapshot.getString("location");
+                                String itemEmail = documentSnapshot.getString("email");
+                                String itemDescription = documentSnapshot.getString("description");
+                                String itemOwner = documentSnapshot.getString("finderName");
+                                String itemPhnum = documentSnapshot.getString("phnum");
+                                String itemDate = documentSnapshot.getString("dateFound");
+                                String itemCategory = documentSnapshot.getString("category");
 
-                    if (imageUrl != null && !imageUrl.isEmpty()) {
-                        Log.d("Found", "Image URL: " + imageUrl);
-                        Glide.with(img)
-                                .load(imageUrl)
-                                .into(img);
-                    }
+                                if (imageUrl != null && !imageUrl.isEmpty()) {
+                                    Glide.with(FoundDetails.this)
+                                            .load(imageUrl)
+                                            .into(img);
+                                }
 
-                    // set the text for the attributes in the .xml file
-                    title.setText(itemName);
-                    address.setText(itemLocation);
-                    dateFound.setText(itemIate);
-                    description.setText(itemDescription);
-                    email.setText(itemEmail);
-                    finderName.setText(itemOwner);
-                    category.setText(itemCategory);
-                    phnum.setText(itemPhnum);
+                                // Set the text for the attributes in the .xml file
+                                title.setText(itemName);
+                                address.setText(itemLocation);
+                                dateFound.setText(itemDate);
+                                description.setText(itemDescription);
+                                email.setText(itemEmail);
+                                finderName.setText(itemOwner);
+                                category.setText(itemCategory);
+                                phnum.setText(itemPhnum);
+                            } else {
+                                Toast.makeText(FoundDetails.this, "Document does not exist!", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
                 } else {
-                    System.out.println("Document does not exist!");
+                    Toast.makeText(FoundDetails.this, "Document not found!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
+
 
         // Set an onClickListener for the Call button
         callBtn.setOnClickListener(new View.OnClickListener() {
