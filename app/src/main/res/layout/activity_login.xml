@@ -54,15 +54,17 @@
                 android:drawableLeft="@drawable/baseline_lock_24"
                 android:drawablePadding="8dp"
                 android:textColor="@color/black"/>
+
             <Button
+                android:id="@+id/login_button"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:text="Login"
-                android:id="@+id/login_button"
-                android:textSize="18sp"
                 android:layout_marginTop="30dp"
                 android:backgroundTint="@color/lavendar"
-                app:cornerRadius = "20dp"/>
+                android:text="Login"
+                android:textSize="18sp"
+                app:cornerRadius="20dp" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

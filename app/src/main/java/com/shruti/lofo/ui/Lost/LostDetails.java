@@ -1,7 +1,6 @@
 package com.shruti.lofo.ui.Lost;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import android.widget.*;
@@ -10,7 +9,6 @@ import android.net.Uri;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
-import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -18,13 +16,12 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.shruti.lofo.R;
-import com.shruti.lofo.Utility;
 
 
 public class LostDetails extends AppCompatActivity {
 
     private ImageView img;
-    private TextView title, address, mail, description, ownerName, phnum, dateLost, time, category;
+    private TextView title, address, mail, description, ownerName, phnumText, dateLost, time, category;
     private Button call, sms, backBtn;
     private FirebaseFirestore db; // Initialize Fire Store
 
@@ -43,7 +40,7 @@ public class LostDetails extends AppCompatActivity {
         mail = findViewById(R.id.mail);
         description = findViewById(R.id.description);
         ownerName = findViewById(R.id.ownerName);
-        phnum = findViewById(R.id.phnum);
+        phnumText = findViewById(R.id.phnum);
         dateLost = findViewById(R.id.dateLost);
         category = findViewById(R.id.category);
         time = findViewById(R.id.timeLost);
@@ -51,10 +48,10 @@ public class LostDetails extends AppCompatActivity {
         sms = findViewById(R.id.sms);
         backBtn = findViewById(R.id.backBtn);
 
-        String itemName = getIntent().getStringExtra("itemId"); // Assuming you pass the itemName as an extra
+        String itemId = getIntent().getStringExtra("itemId"); // Assuming you pass the itemName as an extra
 
         // Perform a query to find the document with the specific itemName
-        Query query = db.collection("lostItems").whereEqualTo("itemName", itemName);
+        Query query = db.collection("lostItems").whereEqualTo("itemName", itemId);
 
         query.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
@@ -74,7 +71,6 @@ public class LostDetails extends AppCompatActivity {
                                 String itemMail = documentSnapshot.getString("email");
                                 String itemDescription = documentSnapshot.getString("description");
                                 String itemOwnerName = documentSnapshot.getString("ownerName");
-                                String itemPhNum = documentSnapshot.getString("phnum");
                                 String itemDateLost = documentSnapshot.getString("dateLost");
 
                                 // Load the image using Glide and adjust the ImageView size
@@ -93,7 +89,6 @@ public class LostDetails extends AppCompatActivity {
                                 mail.setText(itemMail);
                                 description.setText(itemDescription);
                                 ownerName.setText(itemOwnerName);
-                                phnum.setText(itemPhNum);
                                 dateLost.setText(itemDateLost);
                             } else {
                                 Toast.makeText(LostDetails.this, "Data not found!", Toast.LENGTH_SHORT).show();
@@ -111,7 +106,7 @@ public class LostDetails extends AppCompatActivity {
         call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String phoneNumber = phnum.getText().toString();
+                String phoneNumber = phnumText.getText().toString();
                 // When the Call button is clicked, open the phone dialer
                 Intent intent = new Intent(Intent.ACTION_DIAL);
                 intent.setData(Uri.parse("tel:" + phoneNumber));
@@ -123,7 +118,7 @@ public class LostDetails extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                String phoneNumber = phnum.getText().toString();
+                String phoneNumber = phnumText.getText().toString();
                 // When the SMS button is clicked, open the SMS app
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.setData(Uri.parse("sms:" + phoneNumber));
