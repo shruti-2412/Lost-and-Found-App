@@ -6,21 +6,43 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.Lost.LostFragment">
+
+
+    <TextView
+        android:id="@+id/filterButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="18dp"
+        android:layout_marginTop="16dp"
+        android:text="Filter by Category"
+        />
+
+    <Spinner
+        android:id="@+id/categorySpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/filterButton"
+        android:layout_alignParentEnd="true"
+        android:visibility="gone" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/add_lost"
-    android:layout_marginBottom="16dp" />
-
+        android:layout_below="@id/categorySpinner"
+        android:layout_marginBottom="16dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/add_lost"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/white"
-        android:id="@+id/add_lost"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:background="#FFFFFF"
+        android:backgroundTint="@color/white"
         android:src="@drawable/baseline_add_24" />
 
 </RelativeLayout>
