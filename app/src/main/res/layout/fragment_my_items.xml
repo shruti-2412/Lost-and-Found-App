@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.MyItems.MyItems">
-
 
     <TextView
         android:id="@+id/text"
@@ -21,14 +19,20 @@
         android:textAlignment="center"
         android:textSize="24sp" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/lostRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+        android:id="@+id/foundRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="643dp"
-        android:layout_below="@id/text"
-        android:layout_marginTop="-5dp"
-        android:layout_marginBottom="-81dp" />
-
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lostRecyclerView"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp" />
 
 </RelativeLayout>

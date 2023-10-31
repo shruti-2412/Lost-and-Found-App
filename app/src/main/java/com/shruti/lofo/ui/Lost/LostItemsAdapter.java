@@ -10,10 +10,13 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.shruti.lofo.R;
 import com.shruti.lofo.Utility;
 import com.shruti.lofo.ui.Lost.LostItems;
@@ -24,6 +27,7 @@ public class LostItemsAdapter extends FirestoreRecyclerAdapter<LostItems, LostIt
     private String category;
 
     private boolean showDeleteButton;
+
 
     public LostItemsAdapter(@NonNull FirestoreRecyclerOptions<LostItems> options, Context context, String category, boolean showDeleteButton) {
         super(options);
@@ -78,14 +82,17 @@ public class LostItemsAdapter extends FirestoreRecyclerAdapter<LostItems, LostIt
             if (showDeleteButton && (category.isEmpty() || item.getCategory().equals(category))) {
                 // Additional logic for the delete button
                 holder.deleteButton.setVisibility(View.VISIBLE);
+
+
                 holder.deleteButton.setOnClickListener(v -> {
                     String documentId = getSnapshots().getSnapshot(position).getId();
-                    Utility.getCollectionReferrenceForFound().document(documentId).delete()
+                    Utility.getCollectionReferrenceForItems2().document(documentId).delete()
                             .addOnSuccessListener(aVoid -> {
                                 // Item deleted successfully, update the UI or perform other tasks if needed
                             })
                             .addOnFailureListener(e -> {
                                 // An error occurred, handle the error appropriately
+                                Toast.makeText(v.getContext(), "Couldn't delete!", Toast.LENGTH_SHORT).show();
                             });
                 });
             }
@@ -102,6 +109,8 @@ public class LostItemsAdapter extends FirestoreRecyclerAdapter<LostItems, LostIt
         ImageButton deleteButton;
 
 
+
+
         public ItemViewHolder(@NonNull View itemView) {
             super(itemView);
             itemImageView = itemView.findViewById(R.id.itemImageView);
@@ -111,6 +120,7 @@ public class LostItemsAdapter extends FirestoreRecyclerAdapter<LostItems, LostIt
             location = itemView.findViewById((R.id.location));
             date = itemView.findViewById(R.id.dateLost);
             deleteButton= itemView.findViewById(R.id.deleteButton);
+
         }
     }
 }

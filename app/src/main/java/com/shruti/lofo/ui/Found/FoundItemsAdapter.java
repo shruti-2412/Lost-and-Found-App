@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.shruti.lofo.R;
 import com.shruti.lofo.Utility;
 
@@ -79,6 +80,7 @@ public class FoundItemsAdapter extends FirestoreRecyclerAdapter<FoundItems, Foun
           if (showDeleteButton && (category.isEmpty() || item.getCategory().equals(category))) {
               // Additional logic for the delete button
               holder.deleteButton.setVisibility(View.VISIBLE);
+
               holder.deleteButton.setOnClickListener(v -> {
                   String documentId = getSnapshots().getSnapshot(position).getId();
                   Utility.getCollectionReferrenceForFound().document(documentId).delete()
@@ -103,6 +105,7 @@ public class FoundItemsAdapter extends FirestoreRecyclerAdapter<FoundItems, Foun
         TextView date;
         ImageButton deleteButton;
 
+
         public ItemViewHolder(@NonNull View itemView) {
             super(itemView);
             itemImageView = itemView.findViewById(R.id.itemImageView);
@@ -112,6 +115,7 @@ public class FoundItemsAdapter extends FirestoreRecyclerAdapter<FoundItems, Foun
             location = itemView.findViewById((R.id.location));
             date = itemView.findViewById(R.id.dateFound);
             deleteButton= itemView.findViewById(R.id.deleteButton);
+
         }
     }
 }

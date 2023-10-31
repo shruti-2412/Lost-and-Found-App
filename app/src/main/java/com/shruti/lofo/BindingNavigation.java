@@ -1,5 +1,7 @@
 package com.shruti.lofo;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -9,6 +11,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -104,7 +107,27 @@ public class BindingNavigation extends AppCompatActivity implements NavigationVi
             openFragment(new MyItems());
         }
         else if (itemId == R.id.logout_drawer) {
-            Toast.makeText(this,"Logout Sucessfully",Toast.LENGTH_SHORT).show();
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Logout");
+            builder.setMessage("Are you sure you want to log out?");
+            builder.setPositiveButton("Yes", (dialogInterface, i) -> {
+                // Update the shared preferences to indicate that the user is logged out
+                SharedPreferences sharedPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putBoolean("isLoggedIn", false);
+                editor.apply();
+
+                Toast.makeText(this, "Logged out successfully!!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this, Login.class);
+                startActivity(intent);
+                finishAffinity(); // Close all activities in the stack
+            });
+            builder.setNegativeButton("No", (dialogInterface, i) -> {
+                dialogInterface.dismiss();
+            });
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
         }
 
         drawerlayout.closeDrawer(GravityCompat.START);
