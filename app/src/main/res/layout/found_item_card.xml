@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="8dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/itemImageView"
+            android:layout_width="78dp"
+            android:layout_height="85dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="16dp"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop" />
+
+        <TextView
+            android:id="@+id/itemNameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@id/itemImageView"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/item_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/itemNameTextView"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@id/itemImageView"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/finder_label"
+            android:text="Finder"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/item_description"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@+id/itemImageView"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/finderNameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/item_description"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@id/finder_label"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/location_label"
+            android:textStyle="bold"
+            android:text="Location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/finderNameTextView"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@+id/itemImageView"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/finderNameTextView"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@+id/location_label"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/datefound"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/location"
+            android:text="Date Found"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@id/itemImageView"
+            android:textStyle="bold"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:id="@+id/dateFound"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/location"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@+id/datefound"
+            android:textSize="14sp" />
+        <ImageButton
+            android:id="@+id/deleteButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@android:drawable/ic_delete"
+            android:visibility="gone"/>
+
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

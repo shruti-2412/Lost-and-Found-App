@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.Lost.LostItemsFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#EEEDF1"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="72dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="16dp"
+            android:text="Add details of the item you found"
+            android:textAlignment="center"
+            android:textColor="#8692F7"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Item Name"
+            android:textColor="#000000" />
+
+        <EditText
+            android:id="@+id/item_name_edittext"
+            android:layout_width="309dp"
+            android:layout_height="35dp"
+            android:layout_marginBottom="13dp"
+            android:background="@color/white"
+            android:backgroundTint="#FFFFFF"
+            android:inputType="text"
+            android:textColor="#000000" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Description"
+            android:textColor="#000000" />
+
+        <EditText
+            android:id="@+id/description"
+            android:layout_width="312dp"
+            android:layout_height="35dp"
+            android:layout_marginBottom="16dp"
+            android:background="@color/white"
+            android:inputType="text" />
+
+        <TextView
+            android:layout_width="236dp"
+            android:layout_height="wrap_content"
+            android:text="Select category"
+            android:textColor="#000000" />
+
+        <Spinner
+            android:id="@+id/categorySpinner"
+            android:layout_width="358dp"
+            android:layout_height="34dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/white"
+            android:backgroundTint="#FFFFFF"
+            android:hapticFeedbackEnabled="true" />
+
+        <EditText
+            android:id="@+id/otherCategoryEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="Specify Category"
+            android:inputType="text"
+            android:visibility="gone" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Location"
+            android:textColor="#000000" />
+
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/baseline_my_location_24"></ImageView>
+
+            <EditText
+                android:id="@+id/location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#1A0F0F"
+                android:hint="Location at where you found it!"></EditText>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Select Date of found" />
+
+            <ImageButton
+                android:id="@+id/datePickerButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/baseline_date_range_24" />
+
+            <TextView
+                android:id="@+id/selectedDateEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#573C3C"
+                android:hint="Selected Date"
+                android:inputType="none"
+                android:textColor="#000000" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/uploadImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="#F3F3F3"
+            android:backgroundTint="#EBE7E7"
+            android:hapticFeedbackEnabled="false"
+            android:text="Upload Image"
+            app:rippleColor="#F4F3F3"
+
+            />
+
+
+        <Button
+            android:id="@+id/submit_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:text="Submit" />
+
+
+    </LinearLayout>
+
+
+</FrameLayout>

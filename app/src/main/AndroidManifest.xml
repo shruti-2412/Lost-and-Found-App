@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -15,6 +17,9 @@
         android:theme="@style/Theme.LOFO"
         tools:targetApi="31">
         <activity
+            android:name=".MyProfile"
+            android:exported="false" />
+        <activity
             android:name=".Register"
             android:exported="false" />
         <activity
@@ -22,20 +27,20 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
         <activity android:name=".Login"
-            android:exported="false"/>
+            android:exported="true">
+
+        </activity>
 
         <activity
-            android:name=".MainActivity"
-           >
+            android:name=".MainActivity">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
     </application>
-
 </manifest>
