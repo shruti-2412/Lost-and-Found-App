@@ -1,23 +1,200 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.Help.HelpFragment" >
+<!--<ScrollView-->
 
-    <TextView
-        android:id="@+id/text_help"
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    android:fillViewport="true">-->
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:orientation="vertical"
+        android:background="@drawable/contactus_background"
+        tools:context=".Login">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:gravity="center"
+        android:text="Help"
+        android:textColor="@color/white"
+        android:textSize="35sp"
+        android:textStyle="bold" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="30dp"
+        android:backgroundTint="#FFFFFF"
+        app:cardBackgroundColor="#95FFFFFF"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/lavendar_border"
+            android:backgroundTint="#74FFFFFF"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <TextView
+                android:id="@+id/que1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="How do I report a lost item?"
+                android:textColor="#575252"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/ans1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="To report a lost item, simply go to lost section, click on '+' button and add all the required information."
+                android:textAlignment="viewStart"
+                android:textColor="#575252"
+                android:textSize="15sp"
+                android:visibility="gone" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="#FFFFFF"
+        app:cardBackgroundColor="#95FFFFFF"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/lavendar_border"
+            android:backgroundTint="#74FFFFFF"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <TextView
+                android:id="@+id/que2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="How can I check if someone found my lost item?"
+                android:textAlignment="viewStart"
+                android:textColor="#575252"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/ans2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="You can check for you item in found section"
+                android:textAlignment="viewStart"
+                android:textColor="#575252"
+                android:visibility="gone"
+                android:textSize="15sp" />
+
+</LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="#FFFFFF"
+        app:cardBackgroundColor="#95FFFFFF"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/lavendar_border"
+            android:backgroundTint="#74FFFFFF"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <TextView
+                android:id="@+id/que3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="What should I do if I found a lost item? "
+                android:textAlignment="viewStart"
+                android:textColor="#575252"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/ans3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="If you found an item go to found section , click on '+' button and add all th required information about you and the found item"
+                android:textAlignment="viewStart"
+                android:textColor="#575252"
+                android:visibility="gone"
+                android:textSize="15sp" />
+    </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="#FFFFFF"
+        app:cardBackgroundColor="#95FFFFFF"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/lavendar_border"
+            android:backgroundTint="#74FFFFFF"
+            android:orientation="vertical"
+            android:padding="24dp">
+            <TextView
+                android:id="@+id/que4"
+                android:layout_width="318dp"
+                android:layout_height="wrap_content"
+                android:text="What should I do if I found a lost item? "
+                android:textAlignment="viewStart"
+                android:textColor="#575252"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/ans4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="If you found an item go to found section , click on '+' button and add all th required information about you and the found item"
+                android:textAlignment="viewStart"
+                android:textColor="#575252"
+                android:visibility="gone"
+                android:textSize="15sp" />
+
+    </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>
+
+<!--</ScrollView>-->

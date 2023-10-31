@@ -23,11 +23,11 @@ import androidx.fragment.app.FragmentTransaction;
 import com.google.android.material.navigation.NavigationView;
 import com.shruti.lofo.databinding.ActivityBindNavBinding;
 import com.shruti.lofo.ui.AboutUs.AboutUsFragment;
-import com.shruti.lofo.ui.ContactUs.ContactUsFragment;
 import com.shruti.lofo.ui.DashBoard.DashBoardFragment;
 import com.shruti.lofo.ui.Found.FoundFragment;
 import com.shruti.lofo.ui.Help.HelpFragment;
 import com.shruti.lofo.ui.Lost.LostFragment;
+import com.shruti.lofo.ui.MyItems.MyItems;
 import com.shruti.lofo.ui.MyProfile.MyProfileFragment;
 import com.shruti.lofo.ui.PrivacyPolicy.PrivacyPolicyFragment;
 
@@ -103,8 +103,8 @@ public class BindingNavigation extends AppCompatActivity implements NavigationVi
         else if (itemId == R.id.privacy_drawer) {
             openFragment(new PrivacyPolicyFragment());
         }
-        else if (itemId == R.id.contactus_drawer) {
-            openFragment(new ContactUsFragment());
+        else if (itemId == R.id.myitems_drawer) {
+            openFragment(new MyItems());
         }
         else if (itemId == R.id.logout_drawer) {
 

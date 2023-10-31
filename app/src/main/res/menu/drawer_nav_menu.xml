@@ -18,6 +18,11 @@
             android:id="@+id/found_drawer"
             android:title="Found"
             android:icon="@drawable/found_icon"/>
+
+        <item
+            android:id="@+id/myitems_drawer"
+            android:title="My Items"
+            android:icon="@drawable/myitems_drawer"/>
     </group>
 
     <group
@@ -33,15 +38,14 @@
                 android:title="Privacy"
                 android:icon="@drawable/privacy_icon"/>
 
-            <item
-                android:id="@+id/contactus_drawer"
-                android:title="Contact Us"
-                android:icon="@drawable/contactus_icon"/>
+<!--            <item-->
+<!--                android:id="@+id/contactus_drawer"-->
+<!--                android:title="Contact Us"-->
+<!--                android:icon="@drawable/contactus_icon"/>-->
     </group>
 
     <item
         android:title="">
-
         <menu>
             <item
                 android:id="@+id/logout_drawer"
