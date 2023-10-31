@@ -126,7 +126,7 @@ public class FoundFragment extends Fragment {
                 adapter.stopListening();
             }
 
-            adapter = new FoundItemsAdapter(options, requireContext(), selectedCategory);
+            adapter = new FoundItemsAdapter(options, requireContext(), selectedCategory,false);
             adapter.setCategory(selectedCategory);
 
             recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));

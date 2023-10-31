@@ -100,5 +100,17 @@
             android:layout_marginStart="10dp"
             android:layout_toEndOf="@+id/datelost"
             android:textSize="14sp" />
-    </RelativeLayout>
+
+        <ImageButton
+            android:id="@+id/deleteButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@android:drawable/ic_delete"
+            android:visibility="gone"/>
+
+
+</RelativeLayout>
 </androidx.cardview.widget.CardView>

@@ -9,7 +9,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -131,7 +130,7 @@ public class LostFragment extends Fragment {
                 adapter.stopListening();
             }
 
-            adapter = new LostItemsAdapter(options, requireContext(), selectedCategory);
+            adapter = new LostItemsAdapter(options, requireContext(), selectedCategory,false);
             adapter.setCategory(selectedCategory);
 
             recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
