@@ -74,7 +74,7 @@ public class LostDetails extends AppCompatActivity {
                                 String itemMail = documentSnapshot.getString("email");
                                 String itemDescription = documentSnapshot.getString("description");
                                 String itemOwnerName = documentSnapshot.getString("ownerName");
-                                String itemPhNum = documentSnapshot.getString("phone");
+                                String itemPhNum = documentSnapshot.getString("phnum");
                                 String itemDateLost = documentSnapshot.getString("dateLost");
 
                                 // Load the image using Glide and adjust the ImageView size
@@ -111,9 +111,10 @@ public class LostDetails extends AppCompatActivity {
         call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String phoneNumber = phnum.getText().toString();
                 // When the Call button is clicked, open the phone dialer
                 Intent intent = new Intent(Intent.ACTION_DIAL);
-                intent.setData(Uri.parse("tel:" + phnum));
+                intent.setData(Uri.parse("tel:" + phoneNumber));
                 startActivity(intent);
             }
         });
@@ -122,9 +123,10 @@ public class LostDetails extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
+                String phoneNumber = phnum.getText().toString();
                 // When the SMS button is clicked, open the SMS app
                 Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse("sms:" + phnum));
+                intent.setData(Uri.parse("sms:" + phoneNumber));
                 intent.putExtra("sms_body", "Hello, I want to inquire about your lost item.");
                 startActivity(intent);
             }

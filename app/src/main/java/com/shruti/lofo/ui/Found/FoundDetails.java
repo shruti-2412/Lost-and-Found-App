@@ -20,6 +20,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.shruti.lofo.R;
+import com.shruti.lofo.ui.Lost.LostDetails;
 
 public class FoundDetails extends AppCompatActivity {
 
@@ -76,9 +77,12 @@ public class FoundDetails extends AppCompatActivity {
                                 String itemDate = documentSnapshot.getString("dateFound");
                                 String itemCategory = documentSnapshot.getString("category");
 
+                                // Load the image using Glide and adjust the ImageView size
                                 if (imageUrl != null && !imageUrl.isEmpty()) {
                                     Glide.with(FoundDetails.this)
                                             .load(imageUrl)
+                                            .placeholder(R.drawable.placeholder_image)
+                                            .error(R.drawable.baseline_image_search_24)
                                             .into(img);
                                 }
 
@@ -107,9 +111,11 @@ public class FoundDetails extends AppCompatActivity {
         callBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String phoneNumber = phnum.getText().toString();
+
                 // When the Call button is clicked, open the phone dialer
                 Intent intent = new Intent(Intent.ACTION_DIAL);
-                intent.setData(Uri.parse("tel:" + phnum));
+                intent.setData(Uri.parse("tel:" + phoneNumber));
                 startActivity(intent);
             }
         });
@@ -118,10 +124,12 @@ public class FoundDetails extends AppCompatActivity {
         smsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String phoneNumber = phnum.getText().toString();
+
                 // When the SMS button is clicked, open the SMS app
                 Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse("sms:" + phnum));
-                intent.putExtra("sms_body", "Hello, I want to inquire about your lost item.");
+                intent.setData(Uri.parse("sms:" + phoneNumber));
+                intent.putExtra("sms_body", "Hello, I want to inquire about your item.");
                 startActivity(intent);
             }
         });
