@@ -3,7 +3,7 @@ package com.shruti.lofo.ui.Found;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
+
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -20,7 +20,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.shruti.lofo.R;
-import com.shruti.lofo.ui.Lost.LostDetails;
 
 public class FoundDetails extends AppCompatActivity {
 

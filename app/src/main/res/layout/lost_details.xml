@@ -34,6 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Call"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.20"
@@ -47,6 +48,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="SMS"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.80"
@@ -71,7 +73,7 @@
 
     <TextView
         android:id="@+id/title"
-        android:layout_width="70dp"
+        android:layout_width="wrap_content"
         android:layout_height="20dp"
         android:textColor="?android:colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -97,7 +99,7 @@
 
     <TextView
         android:id="@+id/address"
-        android:layout_width="70dp"
+        android:layout_width="wrap_content"
         android:layout_height="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -111,6 +113,7 @@
         android:layout_width="56dp"
         android:layout_height="21dp"
         android:text="Date lost"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.250"
@@ -120,7 +123,7 @@
 
     <TextView
         android:id="@+id/dateLost"
-        android:layout_width="70dp"
+        android:layout_width="wrap_content"
         android:layout_height="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -135,6 +138,7 @@
         android:layout_width="56dp"
         android:layout_height="21dp"
         android:text="Email Address"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.250"
@@ -145,7 +149,7 @@
 
     <TextView
         android:id="@+id/mail"
-        android:layout_width="70dp"
+        android:layout_width="wrap_content"
         android:layout_height="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -160,6 +164,7 @@
         android:layout_width="96dp"
         android:layout_height="20dp"
         android:text="Description"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.250"
@@ -170,9 +175,8 @@
 
     <TextView
         android:id="@+id/description"
-        android:layout_width="119dp"
+        android:layout_width="wrap_content"
         android:layout_height="15dp"
-        android:inputType="textLongMessage"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.647"
@@ -185,6 +189,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Owner Name"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.250"
@@ -196,7 +201,7 @@
 
     <TextView
         android:id="@+id/ownerName"
-        android:layout_width="70dp"
+        android:layout_width="wrap_content"
         android:layout_height="20dp"
         android:textColor="?android:colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -211,6 +216,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Category"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.250"
@@ -221,7 +227,7 @@
 
     <TextView
         android:id="@+id/category"
-        android:layout_width="70dp"
+        android:layout_width="wrap_content"
         android:layout_height="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -236,6 +242,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Phone Number"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.250"
@@ -246,7 +253,7 @@
 
     <TextView
         android:id="@+id/phnum"
-        android:layout_width="70dp"
+        android:layout_width="wrap_content"
         android:layout_height="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -260,6 +267,7 @@
         android:layout_width="35dp"
         android:layout_height="15dp"
         android:text="Time"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.250"
@@ -270,7 +278,7 @@
 
     <TextView
         android:id="@+id/timeLost"
-        android:layout_width="70dp"
+        android:layout_width="wrap_content"
         android:layout_height="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
