@@ -1,17 +1,24 @@
 package com.shruti.lofo.ui.Lost;
 
 import static android.app.Activity.RESULT_OK;
+import static android.content.ContentValues.TAG;
+
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -198,13 +205,32 @@ public class LostItemsFragment extends DialogFragment {
             lostItem.setLocation(location.getText().toString());
             lostItem.setDescription(description.getText().toString());
 
-//            FirebaseAuth mAuth = FirebaseAuth.getInstance();
-//            FirebaseUser currentUser = mAuth.getCurrentUser();
-//
-//            // for ownername, phnum, email, userId, fetch this from database
-//
-//            lostItem.setUserId(currentUser.getUid());
-//            lostItem.setEmail(currentUser.getEmail());
+            FirebaseAuth mAuth = FirebaseAuth.getInstance();
+            FirebaseUser currentUser = mAuth.getCurrentUser();
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+            if (currentUser != null) {
+                String userEmail = currentUser.getEmail();
+
+                // Query the user collection for the current user's details based on their email
+                db.collection("users")
+                        .whereEqualTo("email", userEmail)
+                        .get()
+                        .addOnCompleteListener(task -> {
+                            if (task.isSuccessful()) {
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                    // Retrieve the user's name and phone number from the document
+                                    String userName = document.getString("name");
+                                    String userPhone = document.getString("phone");
+                                    lostItem.setOwnerName(userName);
+                                    lostItem.setPhnum(Long.valueOf(userPhone));
+                                    lostItem.setEmail(userEmail);
+                                }
+                            } else {
+                                Log.d(TAG, "Error getting documents: ", task.getException());
+                            }
+                        });
+            }
 
             saveItemToFirebase(lostItem);
 
