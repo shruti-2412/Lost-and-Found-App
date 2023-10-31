@@ -2,6 +2,8 @@ package com.shruti.lofo.ui.Found;
 
 import android.content.Context;
 import com.bumptech.glide.Glide;
+
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,7 +66,14 @@ public class FoundItemsAdapter extends FirestoreRecyclerAdapter<FoundItems, Foun
 
             // Set an onClickListener for the card view
             holder.itemView.setOnClickListener(v -> {
-                // Perform action when the card is clicked
+                // Create an Intent to start the LostDetails activity
+                Intent intent = new Intent(context, FoundDetails.class);
+
+                // Pass the itemId as an extra to the intent
+                intent.putExtra("itemId", item.getItemName());
+
+                // Start the LostDetails activity
+                context.startActivity(intent);
             });
 
           if (showDeleteButton && (category.isEmpty() || item.getCategory().equals(category))) {
