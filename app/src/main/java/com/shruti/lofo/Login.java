@@ -1,6 +1,5 @@
 package com.shruti.lofo;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,13 +11,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 
 public class Login extends AppCompatActivity {
     EditText loginEmail, loginPassword;
@@ -41,7 +33,7 @@ public class Login extends AppCompatActivity {
             // User is already logged in, navigate to the main activity
             Intent intent = new Intent(this, BindingNavigation.class);
             startActivity(intent);
-            finish(); // Close the current activity to prevent going back to the main activity without login
+            finish();
         }
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,7 +93,6 @@ public class Login extends AppCompatActivity {
                         Intent intent = new Intent(Login.this, BindingNavigation.class);
                         startActivity(intent);
                     } else {
-                        // If authentication fails, display a message to the user.
                         Toast.makeText(Login.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
                     }
                 });
