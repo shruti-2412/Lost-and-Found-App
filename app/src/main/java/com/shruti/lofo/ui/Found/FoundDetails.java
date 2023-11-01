@@ -24,7 +24,8 @@ import com.shruti.lofo.R;
 public class FoundDetails extends AppCompatActivity {
 
     private ImageView img;
-    private TextView title, address, email, dateFound, description, category, finderName, phnum;
+    private TextView title, address, email, dateFound, description, category, finderName;
+    String phnum;
     private Button backBtn, callBtn, smsBtn;
     private FirebaseFirestore db;
 
@@ -44,7 +45,6 @@ public class FoundDetails extends AppCompatActivity {
         finderName = findViewById(R.id.finderName);
         description = findViewById(R.id.description);
         category = findViewById(R.id.category);
-        phnum = findViewById(R.id.phnum);
         backBtn = findViewById(R.id.backBtn);
         callBtn = findViewById(R.id.call);
         smsBtn = findViewById(R.id.sms);
@@ -93,7 +93,7 @@ public class FoundDetails extends AppCompatActivity {
                                 email.setText(itemEmail);
                                 finderName.setText(itemOwner);
                                 category.setText(itemCategory);
-                                phnum.setText(itemPhnum);
+                               phnum=itemPhnum;
                             } else {
                                 Toast.makeText(FoundDetails.this, "Document does not exist!", Toast.LENGTH_SHORT).show();
                             }
@@ -110,11 +110,11 @@ public class FoundDetails extends AppCompatActivity {
         callBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String phoneNumber = phnum.getText().toString();
+
 
                 // When the Call button is clicked, open the phone dialer
                 Intent intent = new Intent(Intent.ACTION_DIAL);
-                intent.setData(Uri.parse("tel:" + phoneNumber));
+                intent.setData(Uri.parse("tel:" + phnum));
                 startActivity(intent);
             }
         });
@@ -123,12 +123,12 @@ public class FoundDetails extends AppCompatActivity {
         smsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String phoneNumber = phnum.getText().toString();
+
 
                 // When the SMS button is clicked, open the SMS app
                 Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse("sms:" + phoneNumber));
-                intent.putExtra("sms_body", "Hello, I want to inquire about your item.");
+                intent.setData(Uri.parse("sms:" + phnum));
+                intent.putExtra("sms_body", "Hello, I want to inquire about item you found.");
                 startActivity(intent);
             }
         });
