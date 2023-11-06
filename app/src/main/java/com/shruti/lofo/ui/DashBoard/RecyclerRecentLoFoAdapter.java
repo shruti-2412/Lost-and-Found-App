@@ -66,9 +66,9 @@ public class RecyclerRecentLoFoAdapter extends RecyclerView.Adapter<RecyclerRece
         } else {
             holder.tag.setTextColor(ContextCompat.getColor(context, android.R.color.holo_green_light));
             holder.tag.setText(recentItems.getTag());
-            holder.date.setText(recentItems.getDateLost());
             holder.owner_label.setText("Finder:");
             holder.ownerName.setText(recentItems.getFinderName());
+            holder.date.setText(recentItems.getDateFound());
         }
 
         // Set an item click listener
