@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -18,6 +19,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -171,6 +177,32 @@ public class DashBoardFragment extends Fragment {
         });
 
 //        recentLostFoundList.setAdapter(adapter);
+        // Get the currently logged in user
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        TextView userName = root.findViewById(R.id.userName); // Replace with your TextView's ID
+
+        if (user != null) {
+            String email = user.getEmail(); // Get the user's email
+            DocumentReference docRef = FirebaseFirestore.getInstance().collection("users").document(email); // Use the email as the document reference
+
+            docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    if (documentSnapshot.exists()) {
+                        String name = documentSnapshot.getString("name");
+                        if (name != null) {
+                            userName.setText(name); // Set the user's name in the TextView
+                        }
+                    }
+                }
+
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    // Handle any errors
+                }
+            });
+        }
 
         return root;
     }

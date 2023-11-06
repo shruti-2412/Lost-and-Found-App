@@ -1,18 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--<ScrollView-->
-
-<!--    android:layout_width="match_parent"-->
-<!--    android:layout_height="match_parent"-->
-<!--    android:fillViewport="true">-->
 
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@drawable/contactus_background"
+        android:background="@drawable/img3"
         tools:context=".Login">
 
     <TextView
@@ -21,7 +16,7 @@
         android:layout_marginTop="12dp"
         android:gravity="center"
         android:text="Help"
-        android:textColor="@color/white"
+        android:textColor="#575252"
         android:textSize="35sp"
         android:textStyle="bold" />
 
