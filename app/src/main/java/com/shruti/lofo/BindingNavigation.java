@@ -21,6 +21,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.shruti.lofo.databinding.ActivityBindNavBinding;
 import com.shruti.lofo.ui.AboutUs.AboutUsFragment;
 import com.shruti.lofo.ui.DashBoard.DashBoardFragment;
@@ -30,6 +32,8 @@ import com.shruti.lofo.ui.Lost.LostFragment;
 import com.shruti.lofo.ui.MyItems.MyItems;
 import com.shruti.lofo.ui.MyProfile.MyProfileFragment;
 import com.shruti.lofo.ui.PrivacyPolicy.PrivacyPolicyFragment;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 
 public class BindingNavigation extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -43,6 +47,8 @@ public class BindingNavigation extends AppCompatActivity implements NavigationVi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bind_nav);
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -81,11 +87,13 @@ public class BindingNavigation extends AppCompatActivity implements NavigationVi
 
         fragmentManager = getSupportFragmentManager();
         openFragment(new DashBoardFragment());
+
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int itemId = item.getItemId();
+
         if (itemId == R.id.myprofile_drawer) {
             openFragment(new MyProfileFragment());
         }
@@ -149,8 +157,8 @@ public class BindingNavigation extends AppCompatActivity implements NavigationVi
         transaction.commit();
     }
 
+
     private void highlightBottomNavigationItem(int itemId) {
         bottomNavigationView.getMenu().findItem(itemId).setChecked(true);
     }
 }
-
