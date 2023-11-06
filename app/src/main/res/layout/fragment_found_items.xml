@@ -70,14 +70,7 @@
             android:backgroundTint="#FFFFFF"
             android:hapticFeedbackEnabled="true" />
 
-        <EditText
-            android:id="@+id/otherCategoryEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:hint="Specify Category"
-            android:inputType="text"
-            android:visibility="gone" />
+
 
 
         <TextView

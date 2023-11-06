@@ -56,7 +56,7 @@ public class FoundItemsFragment extends DialogFragment {
     Uri imageUri;
 
     EditText description;
-    private EditText otherCategoryEditText;
+
     private EditText location ;
     String date= null;
 
@@ -88,7 +88,7 @@ public class FoundItemsFragment extends DialogFragment {
 
 
         categorySpinner = view.findViewById(R.id.categorySpinner);
-        otherCategoryEditText = view.findViewById(R.id.otherCategoryEditText);
+
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(requireContext(),
                 R.array.categories_array, android.R.layout.simple_spinner_item);
@@ -99,13 +99,7 @@ public class FoundItemsFragment extends DialogFragment {
         categorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (position == parent.getCount() - 1) {
-                    otherCategoryEditText.setVisibility(View.VISIBLE);
 
-                } else {
-                    otherCategoryEditText.setVisibility(View.GONE);
-
-                }
                 selectedCategory[0] = categorySpinner.getItemAtPosition(position).toString();
             }
 
@@ -134,10 +128,6 @@ public class FoundItemsFragment extends DialogFragment {
             EditText item =  view.findViewById(R.id.item_name_edittext);
             String itemName =  item.getText().toString();
 
-            if(selectedCategory[0].equals("Other")){
-                EditText other =view.findViewById(R.id.otherCategoryEditText);
-                selectedCategory[0] = other.getText().toString();
-            }
 
 
             // validation
@@ -152,16 +142,7 @@ public class FoundItemsFragment extends DialogFragment {
                 return;
             }
 
-            // If 'Other' is selected, ensure the field is not empty
-            if (selectedCategory[0].equals("Other")) {
-                EditText other = view.findViewById(R.id.otherCategoryEditText);
-                String otherCategory = other.getText().toString();
-                if (otherCategory.isEmpty()) {
-                    Utility.showToast(getContext(), "Other category cannot be empty");
-                    return;
-                }
-                selectedCategory[0] = otherCategory;
-            }
+
 
             if (date == null) {
                 showDatePicker();

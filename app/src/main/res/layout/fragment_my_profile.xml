@@ -12,156 +12,241 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:gravity="center"
-        android:paddingTop="20dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingTop="20dp">
 
         <com.mikhaellopez.circularimageview.CircularImageView
+            android:id="@+id/profileImage"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:src="@drawable/sample_profile"
-            android:id="@+id/profileImage"/>
+            android:src="@drawable/avtar" />
 
         <TextView
+            android:id="@+id/titlename"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Alex Thomas"
-            android:textStyle="bold"
-            android:id="@+id/titlename"
+            android:text="Your Name"
             android:textColor="@color/white"
-            android:textSize="21sp" />
+            android:textSize="21sp"
+            android:textStyle="bold" />
 
+<!--        <androidx.cardview.widget.CardView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_margin="30dp"-->
+<!--            app:cardCornerRadius="30dp"-->
+<!--            app:cardElevation="20dp">-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:background="@drawable/lavendar_border"-->
+<!--                android:gravity="center"-->
+<!--                android:orientation="vertical"-->
+<!--                android:padding="15dp">-->
+
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginLeft="10dp"-->
+<!--                    android:layout_marginTop="20dp"-->
+<!--                    android:layout_marginRight="10dp"-->
+<!--                    android:layout_marginBottom="10dp"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    android:padding="6dp">-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/name"-->
+<!--                        android:layout_width="7dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:drawableLeft="@drawable/baseline_person_24"-->
+<!--                        android:drawablePadding="8dp"-->
+<!--                        android:text="Name"-->
+<!--                        android:textColor="@color/lavendar"-->
+<!--                        android:textSize="18sp"-->
+<!--                        android:textStyle="bold" />-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/profileName"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:text="name"-->
+<!--                        android:textAlignment="viewStart"-->
+<!--                        android:textColor="@color/black"-->
+<!--                        android:textSize="18sp" />-->
+<!--                </LinearLayout>-->
+
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_margin="10dp"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    android:padding="6dp">-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/email"-->
+<!--                        android:layout_width="2dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:drawableLeft="@drawable/baseline_email_24"-->
+<!--                        android:drawablePadding="8dp"-->
+<!--                        android:text="Email"-->
+<!--                        android:textColor="@color/lavendar"-->
+<!--                        android:textSize="18sp"-->
+<!--                        android:textStyle="bold" />-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/profileEmail"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:text="email"-->
+<!--                        android:textAlignment="viewStart"-->
+<!--                        android:textColor="@color/black"-->
+<!--                        android:textSize="18sp" />-->
+<!--                </LinearLayout>-->
+
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_margin="10dp"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    android:padding="6dp">-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/phone"-->
+<!--                        android:layout_width="38dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:drawableLeft="@drawable/baseline_phone_24"-->
+<!--                        android:drawablePadding="6dp"-->
+<!--                        android:text="Phone no"-->
+<!--                        android:textColor="@color/lavendar"-->
+<!--                        android:textSize="18sp"-->
+<!--                        android:textStyle="bold" />-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/profilephone"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:text="phoneno"-->
+<!--                        android:textAlignment="viewStart"-->
+<!--                        android:textColor="@color/black"-->
+<!--                        android:textSize="18sp" />-->
+<!--                </LinearLayout>-->
+
+
+<!--            </LinearLayout>-->
+<!--        </androidx.cardview.widget.CardView>-->
         <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
+            android:layout_width="318dp"
             android:layout_height="wrap_content"
-            android:layout_margin="30dp"
+            android:layout_margin="25dp"
             app:cardCornerRadius="30dp"
-            app:cardElevation="20dp">
+            app:cardElevation="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.752">
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="342dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/lavendar_border"
-                android:gravity="center"
                 android:orientation="vertical"
-                android:padding="15dp">
+                android:padding="24dp">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:orientation="horizontal"
-                    android:padding="6dp">
 
-                    <TextView
-                        android:id="@+id/name"
-                        android:layout_width="7dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:drawableLeft="@drawable/baseline_person_24"
-                        android:drawablePadding="8dp"
-                        android:text="Name"
-                        android:textColor="@color/lavendar"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/profileName"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="name"
-                        android:textAlignment="viewEnd"
-                        android:textColor="@color/black"
-                        android:textSize="18sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="10dp"
-                    android:orientation="horizontal"
-                    android:padding="6dp">
-
-                    <TextView
-                        android:id="@+id/email"
-                        android:layout_width="2dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:drawableLeft="@drawable/baseline_email_24"
-                        android:drawablePadding="8dp"
-                        android:text="Email"
-                        android:textColor="@color/lavendar"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/profileEmail"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="email"
-                        android:textAlignment="viewEnd"
-                        android:textColor="@color/black"
-                        android:textSize="18sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="10dp"
-                    android:orientation="horizontal"
-                    android:padding="6dp">
-
-                    <TextView
-                        android:id="@+id/phone"
-                        android:layout_width="38dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:drawableLeft="@drawable/baseline_phone_24"
-                        android:drawablePadding="6dp"
-                        android:text="Phone no"
-                        android:textColor="@color/lavendar"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/profilephone"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="phoneno"
-                        android:textAlignment="viewEnd"
-                        android:textColor="@color/black"
-                        android:textSize="18sp" />
-                </LinearLayout>
-
-                <Button
-                    android:id="@+id/edit_button"
+                <TextView
+                    android:id="@+id/nameText"
                     android:layout_width="wrap_content"
-                    android:layout_height="48dp"
-                    android:layout_marginTop="35dp"
-                    android:backgroundTint="@color/lavendar"
-                    android:drawableLeft="@drawable/baseline_edit_24"
-                    android:text="Edit Profile"
+                    android:layout_height="wrap_content"
+                    android:text="Username"
+                    android:textColor="@color/lavendar"
                     android:textSize="18sp"
-                    app:cornerRadius="20dp" />
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.250"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.270" />
 
-                <Button
-                    android:id="@+id/changepass_button"
+
+                <TextView
+                    android:id="@+id/profileName"
                     android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="10dp"
-                    android:backgroundTint="@color/lavendar"
-                    android:drawableLeft="@drawable/baseline_lock_white"
-                    android:text="Change Password"
+                    android:layout_height="wrap_content"
                     android:textSize="18sp"
-                    app:cornerRadius="20dp"
-                    android:layout_marginBottom="10dp"/>
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.498"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.27" />
+
+                <TextView
+                    android:id="@+id/emailText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Email ID"
+                    android:textColor="@color/lavendar"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.250"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.320" />
+
+
+                <TextView
+                    android:id="@+id/profileEmail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.498"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.319" />
+
+                <TextView
+                    android:id="@+id/phoneText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Contact Number"
+                    android:textColor="@color/lavendar"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.250"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.388" />
+
+
+                <TextView
+                    android:id="@+id/profilephone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.498"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.388" />
 
 
             </LinearLayout>

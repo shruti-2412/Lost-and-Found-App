@@ -47,6 +47,7 @@ public class BindingNavigation extends AppCompatActivity implements NavigationVi
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
         drawerlayout = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerlayout, toolbar, R.string.OpenDrawer, R.string.CloseDrawer);
         drawerlayout.addDrawerListener(toggle);
@@ -55,6 +56,10 @@ public class BindingNavigation extends AppCompatActivity implements NavigationVi
         NavigationView navigationView = findViewById(R.id.nav_drawer);
         navigationView.setNavigationItemSelectedListener(this);
 
+        View headerView = navigationView.getHeaderView(0);
+
+        // Call the method from DrawerManipulator class to update the drawer header
+        DrawerManipulator.updateDrawerHeader(this, headerView);
         // Fix the ID for your BottomNavigationView
         bottomNavigationView = findViewById(R.id.nav_view);
 
