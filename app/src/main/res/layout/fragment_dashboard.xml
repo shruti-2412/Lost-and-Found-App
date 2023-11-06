@@ -22,18 +22,41 @@
             app:cardElevation="10dp"
             app:cardUseCompatPadding="true"
             app:cardCornerRadius="10dp"
-            android:layout_margin="2dp">
+            android:layout_margin="2dp"
+            android:background="@drawable/dashboard_img1">
 
-            <com.denzcoskun.imageslider.ImageSlider
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:id="@+id/imageSlider"
-                app:iss_period="2000"
-                app:iss_auto_cycle="true"
-                app:iss_delay="2000"
-                app:iss_corner_radius="10">
-                <!-- ImageSlider content here -->
-            </com.denzcoskun.imageslider.ImageSlider>
+                        <com.denzcoskun.imageslider.ImageSlider
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp"
+                            android:id="@+id/imageSlider"
+                            app:iss_period="2000"
+                            app:iss_auto_cycle="true"
+                            app:iss_delay="2000"
+                            app:iss_corner_radius="10">
+                            <!-- ImageSlider content here -->
+
+                            <TextView
+                                android:id="@+id/hello"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginLeft="10dp"
+                                android:text="Hello, "
+                                android:textColor="#8379CD"
+                                android:textStyle="bold"
+                                android:textSize="10dp"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginLeft="10dp"
+                                android:text="userName"
+                                android:layout_toEndOf="@id/hello"
+                                android:textColor="#8379CD"
+                                android:textStyle="bold"
+                                android:textSize="10dp"/>
+                        </com.denzcoskun.imageslider.ImageSlider>
+
 
         </androidx.cardview.widget.CardView>
 
