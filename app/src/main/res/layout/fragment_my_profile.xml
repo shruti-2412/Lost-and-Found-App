@@ -160,7 +160,8 @@
                     android:drawableLeft="@drawable/baseline_lock_white"
                     android:text="Change Password"
                     android:textSize="18sp"
-                    app:cornerRadius="20dp" />
+                    app:cornerRadius="20dp"
+                    android:layout_marginBottom="10dp"/>
 
 
             </LinearLayout>

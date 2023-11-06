@@ -1,20 +1,30 @@
 package com.shruti.lofo.ui.DashBoard;
 
+import static androidx.recyclerview.widget.GridLayoutManager.*;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridLayout;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.denzcoskun.imageslider.ImageSlider;
+import com.denzcoskun.imageslider.constants.ScaleTypes;
+import com.denzcoskun.imageslider.models.SlideModel;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.shruti.lofo.R;
 import com.shruti.lofo.databinding.FragmentDashboardBinding;
+import com.shruti.lofo.ui.Found.FoundDetails;
+import com.shruti.lofo.ui.Lost.LostDetails;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -33,10 +43,26 @@ public class DashBoardFragment extends Fragment {
         binding = FragmentDashboardBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        //image slider
+        ImageSlider imageSlider = root.findViewById(R.id.imageSlider);
+        ArrayList<SlideModel> slideModels = new ArrayList<>();
+
+        slideModels.add(new SlideModel(R.drawable.dashboard_img1, ScaleTypes.FIT));
+        slideModels.add(new SlideModel(R.drawable.dashboard_img2, ScaleTypes.FIT));
+//        slideModels.add(new SlideModel(R.drawable.dashboard_img3, ScaleTypes.FIT));
+//        slideModels.add(new SlideModel(R.drawable.dashboard_img4, ScaleTypes.FIT));
+
+        imageSlider.setImageList(slideModels, ScaleTypes.FIT);
+
+
+
         RecyclerView recentLostFoundList = root.findViewById(R.id.recent_lost_found_list);
-        recentLostFoundList.setLayoutManager(new LinearLayoutManager(requireContext()));
+//        recentLostFoundList.setLayoutManager(new LinearLayoutManager(requireContext()));
 
         arr_recent_lofo = new ArrayList<>();
+
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(requireContext(),2,GridLayoutManager.VERTICAL,false);
+        recentLostFoundList.setLayoutManager(gridLayoutManager);
         adapter = new RecyclerRecentLoFoAdapter(requireContext(), arr_recent_lofo);
         recentLostFoundList.setAdapter(adapter);
 
@@ -122,6 +148,29 @@ public class DashBoardFragment extends Fragment {
                 adapter.notifyDataSetChanged();
             });
         });
+
+
+
+        adapter.setOnItemClickListener(new RecyclerRecentLoFoAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(DashBoardViewModel item) {
+                // Handle the item click here
+                String selectedItemName = item.getItemName();
+                // Create an Intent and navigate to LostDetails activity with the selected item name
+                Intent intent;
+                if(item.getTag().equalsIgnoreCase("lost")) {
+                    intent = new Intent(requireContext(), LostDetails.class);
+                    intent.putExtra("itemId", selectedItemName);
+                }
+                else{
+                    intent = new Intent(requireContext(), FoundDetails.class);
+                    intent.putExtra("itemId", selectedItemName);
+                }
+                startActivity(intent);
+            }
+        });
+
+//        recentLostFoundList.setAdapter(adapter);
 
         return root;
     }

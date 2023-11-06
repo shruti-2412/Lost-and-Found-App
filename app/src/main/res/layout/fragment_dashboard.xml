@@ -1,24 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/img3"
     tools:context=".ui.DashBoard.DashBoardFragment">
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.DashBoard.DashBoardFragment">
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recent_lost_found_list"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
- </LinearLayout>
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-</LinearLayout>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="20dp"
+            app:cardElevation="10dp"
+            app:cardUseCompatPadding="true"
+            app:cardCornerRadius="10dp"
+            android:layout_margin="2dp">
+
+            <com.denzcoskun.imageslider.ImageSlider
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:id="@+id/imageSlider"
+                app:iss_period="2000"
+                app:iss_auto_cycle="true"
+                app:iss_delay="2000"
+                app:iss_corner_radius="10">
+                <!-- ImageSlider content here -->
+            </com.denzcoskun.imageslider.ImageSlider>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recent_lost_found_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            android:layout_marginTop="1dp"/>
+
+    </LinearLayout>
+</ScrollView>
