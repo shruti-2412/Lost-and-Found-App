@@ -71,15 +71,6 @@
             android:backgroundTint="#FFFFFF"
             android:hapticFeedbackEnabled="true" />
 
-        <EditText
-            android:id="@+id/otherCategoryEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:hint="Specify Category"
-            android:inputType="text"
-            android:visibility="gone" />
-
 
         <TextView
             android:layout_width="wrap_content"
@@ -104,7 +95,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#1A0F0F"
-                android:hint="Location at where you think you lost it!"></EditText>
+                android:hint="Location at where you lost it!"></EditText>
         </androidx.appcompat.widget.LinearLayoutCompat>
 
         <LinearLayout

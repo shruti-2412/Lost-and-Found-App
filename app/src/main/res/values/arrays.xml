@@ -4,7 +4,8 @@
         <item>Electronics</item>
         <item>Academics</item>
         <item>Bottle</item>
-        <item>Keys</item>
+        <item>Key</item>
+        <item>Book</item>
         <item>Other</item>
     </string-array>
 </resources>

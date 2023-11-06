@@ -32,29 +32,29 @@
                             app:iss_period="2000"
                             app:iss_auto_cycle="true"
                             app:iss_delay="2000"
-                            app:iss_corner_radius="10">
+                            app:iss_corner_radius="10"
+                            tools:ignore="MissingClass">
                             <!-- ImageSlider content here -->
 
                             <TextView
                                 android:id="@+id/hello"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp"
                                 android:layout_marginLeft="10dp"
-                                android:text="Hello, "
+                                android:text="Hello,"
                                 android:textColor="#8379CD"
-                                android:textStyle="bold"
-                                android:textSize="10dp"/>
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
                             <TextView
+                                android:id="@+id/userName"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp"
                                 android:layout_marginLeft="10dp"
-                                android:text="userName"
                                 android:layout_toEndOf="@id/hello"
                                 android:textColor="#8379CD"
-                                android:textStyle="bold"
-                                android:textSize="10dp"/>
+                                android:textSize="20dp"
+                                android:textStyle="bold" />
                         </com.denzcoskun.imageslider.ImageSlider>
 
 

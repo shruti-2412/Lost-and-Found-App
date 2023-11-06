@@ -1,19 +1,16 @@
 package com.shruti.lofo.ui.DashBoard;
 
-import static androidx.recyclerview.widget.GridLayoutManager.*;
-
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.GridLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.denzcoskun.imageslider.ImageSlider;
@@ -23,10 +20,12 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.shruti.lofo.R;
 import com.shruti.lofo.databinding.FragmentDashboardBinding;
 import com.shruti.lofo.ui.Found.FoundDetails;
@@ -183,26 +182,28 @@ public class DashBoardFragment extends Fragment {
 
         if (user != null) {
             String email = user.getEmail(); // Get the user's email
-            DocumentReference docRef = FirebaseFirestore.getInstance().collection("users").document(email); // Use the email as the document reference
 
-            docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                @Override
-                public void onSuccess(DocumentSnapshot documentSnapshot) {
-                    if (documentSnapshot.exists()) {
-                        String name = documentSnapshot.getString("name");
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            CollectionReference usersCollectionRef = db.collection("users");
+
+            Query query = usersCollectionRef.whereEqualTo("email", email);
+
+            query.get().addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        String name = document.getString("name");
                         if (name != null) {
                             userName.setText(name); // Set the user's name in the TextView
                         }
                     }
-                }
-
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    // Handle any errors
+                } else {
+                    Log.d("FirebaseDebug", "Error getting documents: ", task.getException());
                 }
             });
+        } else {
+            Log.d("FirebaseDebug", "No user currently logged in.");
         }
+
 
         return root;
     }
