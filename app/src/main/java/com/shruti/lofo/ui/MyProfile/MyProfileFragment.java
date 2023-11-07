@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import com.shruti.lofo.R;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
@@ -17,7 +17,6 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.shruti.lofo.R;
 
 public class MyProfileFragment extends Fragment {
     TextView profileName, profileEmail, profilePhone, titleName;
@@ -31,36 +30,46 @@ public class MyProfileFragment extends Fragment {
         profileEmail = root.findViewById(R.id.profileEmail);
         profilePhone = root.findViewById(R.id.profilephone);
         titleName = root.findViewById(R.id.titlename);
-
         database = FirebaseFirestore.getInstance();
 
         fetchUserData();
         return root;
     }
-
     private void fetchUserData() {
+
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = auth.getCurrentUser();
 
-        String userEmail = currentUser.getEmail();
-        database.collection("users")
-                .whereEqualTo("email", userEmail)
-                .get()
-                .addOnSuccessListener(queryDocumentSnapshots -> {
-                    for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                        String nameFromDB = documentSnapshot.getString("name");
-                        String emailFromDB = documentSnapshot.getString("email");
-                        String phoneFromDB = documentSnapshot.getString("phone");
+        String userEmail = null;
+        if (currentUser != null) {
+            userEmail = currentUser.getEmail();
+        } else {
+            Toast.makeText(getContext(), "No user is logged in", Toast.LENGTH_SHORT).show();
+        }
 
-                        // Set retrieved data to TextViews
-                        titleName.setText(nameFromDB);
-                        profileName.setText(nameFromDB);
-                        profileEmail.setText(emailFromDB);
-                        profilePhone.setText(phoneFromDB);
+
+        database.collection("users").document(userEmail).get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (documentSnapshot.exists()) {
+                            String nameFromDB = documentSnapshot.getString("name");
+                            String emailFromDB = documentSnapshot.getString("email");
+                            String phoneFromDB = documentSnapshot.getString("phone");
+
+                            titleName.setText(nameFromDB);
+                            profileName.setText(nameFromDB);
+                            profileEmail.setText(emailFromDB);
+                            profilePhone.setText(phoneFromDB);
+                        }
                     }
                 })
-                .addOnFailureListener(e -> {
-                    // Log the failure or handle the error
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                    }
                 });
     }
 }
+
+
