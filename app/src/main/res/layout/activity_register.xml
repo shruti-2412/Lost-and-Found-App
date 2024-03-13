@@ -53,6 +53,7 @@
                 android:drawableLeft="@drawable/baseline_email_24"
                 android:drawablePadding="8dp"
                 android:textColor="@color/black"/>
+
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
