@@ -48,7 +48,7 @@ public class DashBoardFragment extends Fragment {
         binding = FragmentDashboardBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        //image slider
+        //image sliderc
         ImageSlider imageSlider = root.findViewById(R.id.imageSlider);
         ArrayList<SlideModel> slideModels = new ArrayList<>();
 
