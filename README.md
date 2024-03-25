@@ -31,10 +31,4 @@ Messaging and Communication:
 ● Module Scope: Enable users to communicate with each other to arrange item retrieval through call or SMS.  
 ● Features: Call and SMS to connect with other people 
 
-### Technological Features Covered :
-● Used No SQL database using Firebase Firestore and Firebase storage for storing the user's data, lost and found items data.  
-● Firebase Authentication System  
-
-### References :  
-● Youtube tutorials  
-● Android studio documentation https://developer.android.com/docs  
+### [Link to view Screenshots and Use Manual](https://github.com/shruti-2412/Lost-and-Found-App/blob/master/User%20Manual-%20Lost%20and%20Found%20App.pdf)
