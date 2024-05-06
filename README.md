@@ -31,4 +31,4 @@ Messaging and Communication:
 ● Module Scope: Enable users to communicate with each other to arrange item retrieval through call or SMS.  
 ● Features: Call and SMS to connect with other people 
 
-### [Link to view Screenshots and Use Manual](https://github.com/shruti-2412/Lost-and-Found-App/blob/master/User%20Manual-%20Lost%20and%20Found%20App.pdf)
+### [Link to view Screenshots and User Manual](https://github.com/shruti-2412/Lost-and-Found-App/blob/master/User%20Manual-%20Lost%20and%20Found%20App.pdf)
